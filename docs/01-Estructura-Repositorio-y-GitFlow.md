@@ -6,7 +6,7 @@
 ## 1. Estructura de repositorio recomendada
 
 ```text
-HackatonOracleAlura/
+EnergiAI-G9-Latam-Team15/
 |-- frontend/
 |   |-- src/
 |   |-- public/
@@ -50,7 +50,7 @@ HackatonOracleAlura/
 
 ## 3. Estrategia Git Flow adaptada al hackathon
 
-Como el repositorio aun no esta inicializado, esta propuesta define el modelo operativo recomendado.
+El repositorio ya se encuentra inicializado y esta documentacion formaliza el modelo operativo vigente para el equipo.
 
 ### 3.1 Ramas principales
 
@@ -61,25 +61,28 @@ Como el repositorio aun no esta inicializado, esta propuesta define el modelo op
 
 - **`feature/<dominio>-<nombre>`**
   - Ejemplo: `feature/backend-classification-api`
-  - Uso: nuevas capacidades funcionales o tecnicas.
+  - Uso: nuevas capacidades funcionales o tecnicas creadas desde `develop`.
 
-- **`release/<version>`**
-  - Ejemplo: `release/mvp-demo`
-  - Uso: estabilizacion previa a demo o entrega.
+### 3.3 Flujo oficial
 
-- **`hotfix/<nombre>`**
-  - Ejemplo: `hotfix/ml-timeout`
-  - Uso: correcciones urgentes sobre `main`.
+```text
+main
+  ↑
+develop
+  ↑
+feature/*
+```
 
-### 3.3 Reglas operativas
+### 3.4 Reglas operativas
 
 1. Todo desarrollo parte de `develop`.
 2. Ninguna rama `feature/*` se fusiona sin:
    - build exitoso
    - smoke test funcional
    - revision minima por otro integrante
-3. `main` solo recibe merges desde `release/*` o `hotfix/*`.
-4. Cada merge debe referenciar issue, tarea o decision tecnica.
+3. Toda rama `feature/*` vuelve primero a `develop`.
+4. `main` solo recibe merges validados desde `develop`.
+5. Cada merge debe referenciar issue, tarea o decision tecnica.
 
 ## 4. Convencion de commits
 
@@ -107,10 +110,11 @@ fix(infra): corrige variable de entorno OCI
 - Cambios de contrato API explicitados.
 - Riesgos o deuda tecnica registrados.
 
-## 6. Recomendacion de bootstrap operativo
+## 6. Recomendaciones operativas vigentes
 
-1. Inicializar repositorio Git.
-2. Crear `main` y `develop`.
-3. Configurar proteccion basica sobre `main`.
-4. Activar workflow CI para frontend, backend y ML.
-5. Crear tablero Kanban enlazado a ramas y PRs.
+1. Mantener `main` como linea base estable del proyecto.
+2. Usar `develop` como rama de integracion continua.
+3. Crear ramas `feature/*` desde `develop` para cada cambio trazable.
+4. Configurar proteccion basica sobre `main`.
+5. Activar workflow CI para frontend, backend y ML.
+6. Crear tablero Kanban enlazado a ramas y PRs.
