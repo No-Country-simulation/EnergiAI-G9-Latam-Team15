@@ -1,0 +1,100 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Environment
+.env
+.env.*
+!.env.example
+*.local
+
+# IDE / Editors
+.idea/
+.vscode/
+*.iml
+
+# Node / React
+node_modules/
+frontend/node_modules/
+dist/
+build/
+coverage/
+.npm/
+.pnpm-store/
+yarn-debug.log*
+yarn-error.log*
+
+# Java / Spring Boot
+target/
+out/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/wrapper/maven-wrapper.jar
+
+# Python / ML
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.ipynb_checkpoints
+
+# Data / ML artifacts
+ml-service/models/*.pkl
+ml-service/models/*.joblib
+ml-service/models/*.onnx
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/samples/.gitkeep
+data/samples/*.csv
+data/samples/*.xlsx
+data/samples/*.json
+
+# Secrets / Certificates
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+oci_api_key.pem
+
+# OCI / Infra
+.oci/
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Docker
+docker-data/
+
+# OS generated
+Desktop.ini
+
+# Reports / generated assets
+assets/screenshots/tmp/
+assets/presentations/export/
