@@ -91,6 +91,7 @@ Objetivo:
 
 Accesos habilitados:
 
+- Luis Angel Chavez Mejía
 - Bernardo Adolfo Gómez Montoya
 - Alonso Carbajal
 - Elvis Leniker Trinidad Caldas
@@ -99,7 +100,6 @@ Accesos habilitados:
 
 Pendientes por compartir correo Gmail:
 
-- Luis Angel Chavez Mejía
 - Harrinson Villabona
 - Anayely Reyes
 
