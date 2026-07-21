@@ -1,4 +1,4 @@
- # 📑 ACTA DE REUNIÓN 002 – EnergiAI
+# 📑 ACTA DE REUNIÓN 002 – EnergiAI
 
 ## Fecha
 
@@ -38,7 +38,7 @@ Compartir el registro oficial de la segunda reunión de seguimiento del proyecto
 
 ---
 
-Pendiente de incorporación:
+Pendientes por incorporarse plenamente:
 
 ⏳ Anayely Reyes – Data Engineer
 
@@ -90,3 +90,32 @@ Realizar seguimiento al Sprint 0, validar el estado organizacional y técnico de
 
 ✅ Elaboración de la documentación fundacional del proyecto.
 
+✅ Arquitectura MVP documentada.
+
+✅ Arquitectura Empresarial documentada.
+
+✅ Diagramas C4 publicados.
+
+✅ Gestión de Riesgos documentada.
+
+✅ GitFlow documentado.
+
+✅ Roadmap técnico elaborado.
+
+✅ Guía Maestra del proyecto elaborada.
+
+✅ Pull Request #1 creado y disponible para revisión.
+
+✅ Roles principales confirmados por los integrantes activos.
+
+✅ Documentación centralizada en GitHub.
+
+---
+
+# Revisión del Repositorio
+
+Repositorio oficial confirmado:
+
+```text
+No-Country-simulation / EnergiAI-G9-Latam-Team15
+```

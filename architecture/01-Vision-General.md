@@ -2,7 +2,7 @@
 
 ## Visión
 
-EnergiAI es una solución inteligente orientada al análisis del consumo energético residencial y de pequeños establecimientos.
+EnergiAI es una solución inteligente orientada al análisis del consumo energético para usuario residencial en el alcance oficial del MVP.
 
 Su propósito es transformar datos de consumo eléctrico en información útil que permita a los usuarios:
 

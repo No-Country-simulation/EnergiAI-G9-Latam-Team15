@@ -23,7 +23,7 @@ La propuesta arquitectonica separa claramente la captura y exposicion del produc
 
 ### 2.1 Problema de negocio
 
-Los usuarios residenciales y de pequenos comercios suelen carecer de interpretacion util de su consumo electrico. El dato existe, pero no se transforma en decisiones accionables.
+Para el alcance oficial del MVP, los usuarios residenciales suelen carecer de interpretacion util de su consumo electrico. El dato existe, pero no se transforma en decisiones accionables.
 
 ### 2.2 Objetivos de negocio
 

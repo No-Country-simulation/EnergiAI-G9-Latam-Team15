@@ -151,11 +151,25 @@ Documentos relacionados:
 
 Estrategia de ramas adoptada:
 
-- `main`: estado estable y demostrable
-- `develop`: integracion continua del trabajo del equipo
-- `feature/<dominio>-<nombre>`: nuevas capacidades
-- `release/<version>`: estabilizacion de entrega
-- `hotfix/<nombre>`: correcciones urgentes
+- `main`: linea base estable y oficial del proyecto
+- `develop`: rama de integracion continua previa a promotion a `main`
+- `feature/<dominio>-<nombre>`: nuevas capacidades creadas desde `develop`
+
+Flujo oficial:
+
+```text
+main
+  ↑
+develop
+  ↑
+feature/*
+```
+
+Reglas operativas:
+
+1. Toda nueva capacidad nace desde `develop` en una rama `feature/*`.
+2. Todo Pull Request funcional o tecnico se integra primero en `develop`.
+3. `main` recibe unicamente integraciones validadas desde `develop` para consolidar lineas base estables.
 
 Convencion de commits:
 
