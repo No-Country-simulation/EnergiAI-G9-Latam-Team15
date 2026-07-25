@@ -64,6 +64,7 @@ data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/processed/dataset_maestro_v2.csv
 !data/samples/.gitkeep
 data/samples/*.csv
 data/samples/*.xlsx

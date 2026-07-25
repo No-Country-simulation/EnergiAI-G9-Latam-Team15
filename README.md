@@ -24,6 +24,7 @@ La plataforma combina:
 - [Roadmap](#roadmap)
 - [Git Flow](#git-flow)
 - [OCI](#oci)
+- [Dataset](#dataset)
 - [Documentacion](#documentacion)
 - [Equipo](#equipo)
 - [Como Contribuir](#como-contribuir)
@@ -207,6 +208,23 @@ Referencia:
 - [Arquitectura Empresarial y MVP](architecture/03-Arquitectura-Empresarial-EnergiAI.md)
 - [Guia Maestra del Proyecto](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
 
+## Dataset
+
+El **Dataset Maestro v2** es un conjunto sintetico calibrado con demanda real de
+XM Colombia: 10.000 registros de consumo residencial, construidos sobre la curva
+horaria oficial del sistema electrico colombiano, con el esquema de columnas
+alineado a `API_CONTRACT_V1`.
+
+Ubicacion: [`data/processed/dataset_maestro_v2.csv`](data/processed/dataset_maestro_v2.csv)
+
+| Documento | Descripcion |
+|---|---|
+| [Informe de Consolidacion del Dataset](docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md) | Metodologia, curva horaria, criterios de clasificacion y estadisticas |
+| [Nota de Arquitectura y Trazabilidad](docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md) | Decision de arquitectura, encuadre de rol y trazabilidad legal de fuentes |
+| [Script de generacion](docs/data-engineering/dataset_maestro_v2.py) | Pipeline reproducible y parametrizado |
+| [Dataset Research Report v1](docs/data-engineering/Dataset_Research_Report_v1.md) | Antecedente: investigacion de fuentes (v1) |
+| [Dataset Strategy v1](docs/data-engineering/Dataset_Strategy_v1.md) | Antecedente: estrategia de datos (v1) |
+
 ## Documentacion
 
 La documentacion principal del proyecto se encuentra organizada en:
@@ -221,6 +239,8 @@ Indice recomendado:
 - [Indice Maestro de Documentacion](docs/00-Indice-Arquitectura.md)
 - [Guia Maestra del Proyecto EnergiAI](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
 - [Gestion de Riesgos Arquitectonicos](planning/04-Gestion-de-Riesgos-Arquitectonicos.md)
+- [Dataset — Informe de Consolidacion](docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md)
+- [Dataset — Nota de Arquitectura y Trazabilidad](docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md)
 
 ## Equipo
 

@@ -12,6 +12,7 @@
 - `architecture/01-Vision-General.md`
 - `architecture/02-Arquitectura-Propuesta.md`
 - `architecture/03-Arquitectura-Empresarial-EnergiAI.md`
+- `architecture/contracts/API_CONTRACT_V1.md`
 
 ### Diagramas
 
@@ -24,10 +25,19 @@
 - `docs/02-Revision-Arquitectonica-y-Version-Optimizada.md`
 - `docs/03-Guia-Maestra-Proyecto-EnergiAI.md`
 
+### Data Engineering
+
+- `docs/data-engineering/Dataset_Research_Report_v1.md`
+- `docs/data-engineering/Dataset_Strategy_v1.md`
+- `docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md`
+- `docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md`
+
 ### Actas y Seguimiento
 
 - `meetings/ActaReunion-001-ENERGIAI.md`
 - `meetings/ActaReunion-002-ENERGIAI.md`
+- `meetings/ActaReunion-003-ENERGIAI.md`
+- `meetings/ActaReunion-004-ENERGIAI.md`
 
 ### Planeacion
 
@@ -71,3 +81,4 @@ El MVP oficial de EnergiAI se enfoca en:
 
 ```text
 Usuario Residencial
+```
