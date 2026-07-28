@@ -39,6 +39,7 @@
 - `meetings/ActaReunion-002-ENERGIAI.md`
 - `meetings/ActaReunion-003-ENERGIAI.md`
 - `meetings/ActaReunion-004-ENERGIAI.md`
+- `meetings/ActaReunion-005-ENERGIAI.md`
 
 ### Planeacion
 
@@ -46,6 +47,7 @@
 - `planning/02-Riesgos.md`
 - `planning/03-Roadmap-Tecnico-5-Semanas.md`
 - `planning/04-Gestion-de-Riesgos-Arquitectonicos.md`
+- `planning/05-Backlog-Sprint2-ENERGIAI.md`
 
 ---
 
