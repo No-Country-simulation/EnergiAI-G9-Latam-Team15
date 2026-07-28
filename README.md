@@ -210,18 +210,28 @@ Referencia:
 
 ## Dataset
 
-El **Dataset Maestro v2** es un conjunto sintetico calibrado con demanda real de
-XM Colombia: 10.000 registros de consumo residencial, construidos sobre la curva
-horaria oficial del sistema electrico colombiano, con el esquema de columnas
-alineado a `API_CONTRACT_V1`.
+El dataset **vigente** es el **Dataset Maestro v3 (hibrido)**: combina consumo
+real de hogares (GoiEner) con la metodologia de calibracion y etiquetado
+balanceado validada en la v2. 50.869 filas reales, esquema alineado a
+`API_CONTRACT_V1`, validado con GroupKFold por hogar (91.7% accuracy vs 38.4%
+baseline).
+
+Ubicacion: [`data/processed/dataset_hibrido_v3.csv`](data/processed/dataset_hibrido_v3.csv)
+
+**Antecedente**: el **Dataset Maestro v2** es un conjunto sintetico calibrado
+con demanda real de XM Colombia: 10.000 registros de consumo residencial,
+construidos sobre la curva horaria oficial del sistema electrico colombiano.
+Se conserva como base metodologica de la v3.
 
 Ubicacion: [`data/processed/dataset_maestro_v2.csv`](data/processed/dataset_maestro_v2.csv)
 
 | Documento | Descripcion |
 |---|---|
-| [Informe de Consolidacion del Dataset](docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md) | Metodologia, curva horaria, criterios de clasificacion y estadisticas |
-| [Nota de Arquitectura y Trazabilidad](docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md) | Decision de arquitectura, encuadre de rol y trazabilidad legal de fuentes |
-| [Script de generacion](docs/data-engineering/dataset_maestro_v2.py) | Pipeline reproducible y parametrizado |
+| [Informe Hibrido v3](docs/data-engineering/INFORME_HIBRIDO_v3.md) | Metodologia hibrida XM+GoiEner, validacion honesta y declaracion de columnas reales/sinteticas |
+| [Script de construccion hibrido](docs/data-engineering/build_hibrido_final.py) | Pipeline reproducible del dataset hibrido v3 |
+| [Informe de Consolidacion del Dataset](docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md) | Antecedente (v2): Metodologia, curva horaria, criterios de clasificacion y estadisticas |
+| [Nota de Arquitectura y Trazabilidad](docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md) | Antecedente (v2): Decision de arquitectura, encuadre de rol y trazabilidad legal de fuentes |
+| [Script de generacion](docs/data-engineering/dataset_maestro_v2.py) | Antecedente (v2): Pipeline reproducible y parametrizado |
 | [Dataset Research Report v1](docs/data-engineering/Dataset_Research_Report_v1.md) | Antecedente: investigacion de fuentes (v1) |
 | [Dataset Strategy v1](docs/data-engineering/Dataset_Strategy_v1.md) | Antecedente: estrategia de datos (v1) |
 
@@ -239,6 +249,8 @@ Indice recomendado:
 - [Indice Maestro de Documentacion](docs/00-Indice-Arquitectura.md)
 - [Guia Maestra del Proyecto EnergiAI](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
 - [Gestion de Riesgos Arquitectonicos](planning/04-Gestion-de-Riesgos-Arquitectonicos.md)
+- [Dataset — Informe Hibrido v3](docs/data-engineering/INFORME_HIBRIDO_v3.md)
+- [Dataset — Script de construccion hibrido](docs/data-engineering/build_hibrido_final.py)
 - [Dataset — Informe de Consolidacion](docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md)
 - [Dataset — Nota de Arquitectura y Trazabilidad](docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md)
 

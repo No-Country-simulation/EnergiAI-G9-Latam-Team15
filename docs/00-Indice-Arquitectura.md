@@ -31,6 +31,7 @@
 - `docs/data-engineering/Dataset_Strategy_v1.md`
 - `docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md`
 - `docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md`
+- `docs/data-engineering/INFORME_HIBRIDO_v3.md`
 
 ### Actas y Seguimiento
 
