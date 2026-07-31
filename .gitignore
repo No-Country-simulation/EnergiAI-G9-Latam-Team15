@@ -100,3 +100,7 @@ Desktop.ini
 # Reports / generated assets
 assets/screenshots/tmp/
 assets/presentations/export/
+
+# Local/private workspace (prompts, respaldos, auditorías temporales,
+# documentación privada, trabajo experimental — nunca se sube a GitHub)
+docs/local/
