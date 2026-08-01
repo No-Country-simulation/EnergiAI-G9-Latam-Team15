@@ -36,6 +36,27 @@
 
 ---
 
+## Hallazgo — 2026-08-01: `develop` y `main` desalineados
+
+Verificado con `git log`: `origin/develop` está 7 commits adelante de
+`origin/main` (dataset híbrido v3, frontend completo, documentación de
+data-engineering, actas 005/006 — ~68.700 líneas de diferencia). No existe
+en ningún documento del repositorio (backlog, plan de despliegue, actas)
+una fecha o decisión explícita de cuándo se mergeará `develop` a `main`.
+
+**Riesgo:** si NoCountry o el jurado evalúan el repositorio mirando `main`
+(rama por defecto), verían una versión desactualizada del proyecto — sin
+dataset, sin frontend, sin la documentación reciente.
+
+**Acción recomendada:** confirmar con el Product Owner y el equipo cuándo
+se planea el merge `develop` → `main` (¿al cierre de Sprint 2? ¿justo
+antes de la demo final?). No es bloqueante para el despliegue OCI de este
+fin de semana, pero sí debe resolverse antes de la entrega final.
+
+**Responsable de escalar:** Bernardo Gómez Montoya (Architect).
+
+---
+
 ## 3. Relación con la matriz de riesgos arquitectónicos vigente
 
 `planning/04-Gestion-de-Riesgos-Arquitectonicos.md` ya identificaba R-04 (despliegue OCI tardío) como crítico desde el 2026-07-13. Esta matriz operativa es la traducción de ese riesgo, y de R-02/R-03/R-05, a una ventana de tiempo concreta (48-72h) con probabilidad evaluada sobre evidencia actual, no sobre el riesgo general del proyecto. Si al cierre del domingo (`docs/governance/CHECKLIST_DOMINGO_DESPLIEGUE.md`) alguno de estos riesgos se materializó, debe reflejarse también en la matriz original de `planning/04` el lunes.
