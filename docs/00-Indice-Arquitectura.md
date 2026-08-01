@@ -40,6 +40,15 @@
 - `docs/governance/MATRIZ_DEPENDENCIAS_SPRINT2.md`
 - `docs/governance/ENTREGABLES_NOCOUNTRY.md`
 
+### Continuidad Operativa 48h y Despliegue del Fin de Semana (Sprint 2)
+
+> Generados 2026-07-31 para sostener el proyecto sin bloqueos si algun integrante no participa durante el fin de semana de despliegue. Empezar por `ESTADO_OPERATIVO_SPRINT2.md`.
+
+- `docs/governance/ESTADO_OPERATIVO_SPRINT2.md` — matriz RAG por area, dependencias criticas y flujo operativo Viernes-Lunes
+- `docs/governance/RIESGOS_OPERATIVOS_SPRINT2.md` — riesgos de continuidad con probabilidad de incumplimiento e impacto sobre OCI
+- `docs/deployment/PLAN_CONTINGENCIA_OCI.md` — que hacer si ML/Backend/Frontend/OCI fallan, decisiones pre-autorizadas por escenario
+- `docs/governance/CHECKLIST_DOMINGO_DESPLIEGUE.md` — guion operativo del dia de despliegue, en bloques horarios
+
 ### Data Engineering
 
 - `docs/data-engineering/Dataset_Research_Report_v1.md`

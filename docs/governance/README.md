@@ -8,6 +8,9 @@ Gobernanza técnica del proyecto: auditorías generales, matrices de dependencia
 - `MATRIZ_DEPENDENCIAS_SPRINT2.md` — dependencias entre las tareas del Backlog Sprint 2, camino crítico hacia el despliegue OCI y contraste entre lo reportado en actas y el estado real del repositorio.
 - `ENTREGABLES_NOCOUNTRY.md` — estado de los entregables identificados por el equipo para la evaluación de NoCountry.
 - `RESUMEN_EJECUTIVO_AUDITORIA_SPRINT2.md` — síntesis de una página para lectura ejecutiva (Product Owner / jurado / stakeholders).
+- `ESTADO_OPERATIVO_SPRINT2.md` — estado operativo de continuidad a 48-72h (matriz RAG por área, dependencias críticas, flujo Viernes→Lunes).
+- `RIESGOS_OPERATIVOS_SPRINT2.md` — riesgos de continuidad del fin de semana de despliegue, con probabilidad de incumplimiento e impacto sobre OCI evaluados sobre evidencia.
+- `CHECKLIST_DOMINGO_DESPLIEGUE.md` — guion operativo del día de despliegue, en bloques horarios con puntos de decisión go/no-go.
 
 ## Relación con `planning/`
 
