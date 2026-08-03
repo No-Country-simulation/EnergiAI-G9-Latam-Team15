@@ -76,7 +76,7 @@ function generarMockResponse(datos) {
 
 export async function analizarConsumo(datos) {
   try {
-    const response = await fetch(`${API_URL}/analisis-energetico`, {
+    const response = await fetch(`${API_URL}/api/v1/analisis-energetico`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datos),
