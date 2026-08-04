@@ -64,8 +64,6 @@ data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
-!data/processed/dataset_maestro_v2.csv
-!data/processed/dataset_hibrido_v3.csv
 !data/samples/.gitkeep
 data/samples/*.csv
 data/samples/*.xlsx
@@ -100,15 +98,3 @@ Desktop.ini
 # Reports / generated assets
 assets/screenshots/tmp/
 assets/presentations/export/
-
-# Local/private workspace (prompts, respaldos, auditorías temporales,
-# documentación privada, trabajo experimental — nunca se sube a GitHub)
-docs/local/
-
-# Archivos locales / diagnóstico OCI (no van al repo)
-AUTENTICACION
-Config
-cazador_oci.py
-diag_oci.py
-verifica_oci.py
-divar_oci.py

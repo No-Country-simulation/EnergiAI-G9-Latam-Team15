@@ -20,7 +20,7 @@ Realizar seguimiento técnico y organizacional del Sprint 1, validar avances de 
 
 ---
 
-# Participantes
+# Asistentes
 
 - Bernardo Adolfo Gómez Montoya – Software / Solution Architect
 - Elvis Leniker Trinidad Caldas – Backend Developer
@@ -29,6 +29,14 @@ Realizar seguimiento técnico y organizacional del Sprint 1, validar avances de 
 
 ---
 
+# Ausentes
+
+- Luis Angel Chavez Mejía – Product Owner
+- Harrinson Villabona – Data Scientist
+- Alonso Carbajal – Full Stack Developer
+- Anayely Reyes – Data Engineer
+
+---
 
 # Objetivos Revisados
 
