@@ -3,6 +3,7 @@ package com.energiai.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public record AnalisisRequestDTO(
 
@@ -25,7 +26,7 @@ public record AnalisisRequestDTO(
         String tipoInmueble,
 
         @NotNull(message = "Las horas de alto consumo son obligatorias")
-        @Positive(message = "Las horas deben ser un valor positivo")
+        @PositiveOrZero(message = "Las horas no pueden ser negativas")
         @JsonProperty("horas_alto_consumo")
         Integer horasAltoConsumo
 ) {}
