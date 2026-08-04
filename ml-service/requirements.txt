@@ -1,0 +1,8 @@
+# EnergiAI — ml-service | dependencias del servicio de inferencia
+# IMPORTANTE: usar Python 3.11 o 3.12 (NO 3.14 — aún sin wheels de ML).
+# train.py y inference.py deben correr en el MISMO venv para que el .pkl sea compatible.
+scikit-learn==1.5.2
+pandas==2.2.3
+joblib==1.4.2
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
