@@ -38,6 +38,19 @@ services:
     networks:
       - energiai-net
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8080}
+    image: energiai-frontend:local
+    container_name: energiai-frontend
+    ports:
+      - "${FRONTEND_HOST_PORT:-5180}:80"
+    networks:
+      - energiai-net
+
 networks:
   energiai-net:
     name: energiai-net
