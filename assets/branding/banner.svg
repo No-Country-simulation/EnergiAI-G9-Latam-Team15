@@ -1,0 +1,60 @@
+<svg viewBox="0 0 1200 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1128"/>
+      <stop offset="55%" stop-color="#0f2540"/>
+      <stop offset="100%" stop-color="#0c3b3e"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e2f8ff"/>
+      <stop offset="100%" stop-color="#7cf5c4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="280" fill="url(#bg)"/>
+
+  <!-- grid lines, sutil -->
+  <g stroke="#1e3a5f" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="60" x2="1200" y2="60"/>
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="200" y1="0" x2="200" y2="280"/>
+    <line x1="400" y1="0" x2="400" y2="280"/>
+    <line x1="800" y1="0" x2="800" y2="280"/>
+    <line x1="1000" y1="0" x2="1000" y2="280"/>
+  </g>
+
+  <circle cx="1030" cy="90" r="140" fill="url(#glow)"/>
+
+  <!-- circuito decorativo derecha -->
+  <g stroke="#3fd8c9" stroke-width="2" fill="none" opacity="0.55">
+    <path d="M 950 220 L 1000 220 L 1000 180 L 1060 180"/>
+    <path d="M 1080 240 L 1080 200 L 1130 200 L 1130 150"/>
+    <circle cx="950" cy="220" r="4" fill="#3fd8c9"/>
+    <circle cx="1060" cy="180" r="4" fill="#3fd8c9"/>
+    <circle cx="1130" cy="150" r="4" fill="#3fd8c9"/>
+  </g>
+
+  <!-- icono rayo -->
+  <g transform="translate(90,70)">
+    <polygon points="70,0 20,85 55,85 40,150 100,55 60,55" fill="url(#bolt)"/>
+  </g>
+
+  <!-- textos -->
+  <text x="220" y="130" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="700" fill="url(#titleGrad)">EnergiAI</text>
+  <text x="220" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#a9c6d8">Inteligencia para el Consumo Energético</text>
+  <text x="220" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#5fe0c7" letter-spacing="2">HACKATHON ONE G9 · LATAM — ALURA + ORACLE + NOCOUNTRY</text>
+
+  <!-- badge esquina -->
+  <rect x="220" y="220" width="150" height="30" rx="15" fill="#123a44" stroke="#3fd8c9" stroke-width="1"/>
+  <text x="240" y="240" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#7cf5c4">⚡ Team15</text>
+</svg>
