@@ -56,13 +56,14 @@ POST /api/v1/analisis-energetico
 
 ### tipo_inmueble
 
+**Vigente para el MVP (2026-08-05):**
+
 ```text
 Casa
-Apartamento
-Local
-Oficina
-Pequeño Negocio
+Pequeño establecimiento
 ```
+
+> **Nota de alineación (2026-08-05):** esta lista reemplaza la versión original de este contrato (`Casa, Apartamento, Local, Oficina, Pequeño Negocio`), que nunca coincidió con las categorías reales sobre las que se entrenó el modelo (`ml-service/train.py`, `CATEGORICAL_FEATURES`). El encoder del modelo usa `handle_unknown='ignore'`, así que enviar un valor no soportado no provoca error, pero degrada la predicción de forma silenciosa (se codifica como si no perteneciera a ninguna categoría conocida). Decisión de alcance MVP registrada en `meetings/ActaReunion-007-ENERGIAI.md` §4.3: mantener solo las dos categorías con datos reales suficientes; ampliar cobertura es mejora de Fase 2 (requiere reentrenar el modelo con muestra que incluya los demás tipos).
 
 ---
 
@@ -195,7 +196,7 @@ El MVP deberá permitir:
 
 **Versión:** 1.0
 
-**Estado:** Propuesto para Validación del Equipo
+**Estado:** Vigente — implementado y verificado end-to-end (demo 2026-08-04, `meetings/ActaReunion-008-ENERGIAI.md`)
 
 **Responsable:**  
 Bernardo Adolfo Gómez Montoya  
@@ -203,3 +204,5 @@ Software / Solution Architect
 
 **Fecha:**  
 21/07/2026
+
+**Última revisión:** 2026-08-05 — corrección de `tipo_inmueble` para reflejar las categorías reales del modelo (ver sección "Valores Permitidos"). Ver ADR-001 en `architecture/decisions/ADR-001-contrato-integracion-v1.md` para el historial de esta decisión. El contrato Backend↔ML Service (interno, no cubierto por este documento) está en `architecture/contracts/CONTRATO_INTERNO_BACKEND_ML.md`.

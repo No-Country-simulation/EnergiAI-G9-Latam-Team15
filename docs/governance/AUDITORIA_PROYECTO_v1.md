@@ -9,6 +9,30 @@
 
 ---
 
+## ADENDA — 2026-08-05
+
+Snapshot re-emitido: el sistema completo (Frontend + Backend + ML Service) está construido, integrado sin mock, y desplegado en OCI. Estado por dimensión, actualizado:
+
+| Dimensión | Estado 2026-07-31 | Estado 2026-08-05 |
+|---|---|---|
+| Documentación / Arquitectura | ✅ Fuerte | ✅ Fuerte — + 2 ADR, contrato interno Backend↔ML, C4 N3, diagrama de secuencia |
+| Dataset | ✅ Fuerte | ✅ Sin cambios |
+| Frontend | 🟡 Funcional pero desacoplado | 🟢 Integrado con backend real, desplegado en OCI |
+| Backend | 🔴 Inexistente | 🟢 Implementado, desplegado en OCI — sin tests aún |
+| Servicio ML | 🔴 Inexistente | 🟢 Implementado, desplegado en OCI — modelo no versionado como artefacto independiente (se entrena en cada build), sin notebook ni tests |
+| Infraestructura / OCI | 🔴 Inexistente | 🟢 3 imágenes en OCIR, stack corriendo — ver `infra/oci/README.md` (URL pública pendiente de documentar) |
+| CI/CD | 🔴 Inexistente | 🔴 Sigue inexistente — `.github/workflows/` sigue vacío |
+
+**Hallazgo nuevo (no cubierto el 2026-07-31):** mismatch entre `API_CONTRACT_V1.md` (`tipo_inmueble`, 5 valores) y el modelo real entrenado (2 valores) — corregido el 2026-08-05, ver `architecture/decisions/ADR-001-contrato-integracion-v1.md`.
+
+**Deuda técnica que persiste sin cambios:** cero tests en backend y en ml-service; motor de recomendaciones decidido (ADR-002) pero no implementado; sin persistencia de histórico; sin CI/CD.
+
+Detalle completo de qué se corrigió hoy y qué queda pendiente, con responsables sugeridos por rol, en `docs/local/revisiones/AUDITORIA_DOCUMENTAL_2026-08-05.md` (documento local, no versionado en GitHub).
+
+El resto de este documento se conserva sin modificar como registro histórico de la auditoría del 2026-07-31.
+
+---
+
 ## 1. Resumen ejecutivo
 
 El proyecto tiene una **base documental y de datos sólida** (arquitectura, contrato de integración, gestión de riesgos, dataset real validado) pero **cero código ejecutable en backend y en el servicio ML**, y **cero artefactos de infraestructura**. El frontend es el único componente con implementación real, y opera de forma autosuficiente mediante un mock local que sustituye por completo al backend.

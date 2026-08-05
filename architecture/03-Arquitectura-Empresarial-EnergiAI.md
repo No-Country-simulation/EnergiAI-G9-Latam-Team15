@@ -188,33 +188,42 @@ El MVP debe incluir exclusivamente capacidades necesarias para demostrar valor:
 
 **Decision:** Guardar datasets, modelos y evidencias en Object Storage.  
 **Justificacion:** Es simple, durable y nativo de OCI; evita soluciones ad hoc para artefactos.
+**Nota 2026-08-05:** no implementada en el primer despliegue. El modelo se entrena y serializa dentro del build de la imagen Docker del ML service (`ml-service/train.py` → `ml-service/Dockerfile`), sin pasar por Object Storage. Se mantiene como decision vigente para una siguiente iteracion (permite versionar el modelo independientemente de la imagen y evita reentrenar en cada build).
+
+### DA-06. Motor de recomendaciones alojado en el Backend
+
+**Decision:** El motor de reglas de recomendaciones (hoy implementado como mock en `frontend/src/services/apiService.js`) debe vivir en el Backend Spring Boot, como parte de `AnalisisEnergeticoService`, no en el frontend ni en el servicio ML.
+**Justificacion:** Ver `docs/architecture/MOTOR_RECOMENDACIONES_v1.md` (auditoria 2026-07-31, Opcion A). Las reglas son deterministas y no dependen de un resultado probabilistico del modelo — encajan como logica de negocio del orquestador central (consistente con DA-01), y pueden implementarse sin bloquear ni depender del servicio ML.
+**Estado de implementacion (2026-08-05):** decidido a nivel de arquitectura, **no implementado aun**. `AnalisisEnergeticoService.java` hoy devuelve 3 recomendaciones fijas hardcodeadas (no las 8 reglas del mock de frontend, ni logica derivada de las variables de entrada). El frontend sigue usando `generarRecomendaciones()` unicamente como fallback de contingencia si el backend no responde — ese uso como fallback es correcto y debe mantenerse. Trabajo asignado a Cristian Coronel y Harrinson Villabona en `meetings/ActaReunion-008-ENERGIAI.md` §6 ("enriquecer recomendaciones con la data disponible"); portar las 8 reglas actuales al backend es el paso minimo antes de esa mejora.
 
 ## 8. Estrategia de integracion OCI
 
-### 8.1 Servicios OCI recomendados
+> **Actualizacion 2026-08-05:** las secciones 8.1 y 8.2 documentan la estrategia *objetivo* definida el 2026-07-13. El primer despliegue real ya ocurrio (imagenes `energiai-{frontend,backend,ml}:v1` publicadas en OCIR y stack corriendo en OCI, confirmado en `meetings/ActaReunion-007-ENERGIAI.md` y `ActaReunion-008-ENERGIAI.md`). Ese primer despliegue **simplifico deliberadamente el alcance** frente a lo aqui descrito: sin base de datos relacional, sin Object Storage para el modelo (se entrena dentro de la imagen Docker del ML service, ver `ml-service/Dockerfile`) y sin Vault/API Gateway. El diagrama de contenedores vigente esta en `diagrams/02-C4-Nivel-2-Contenedores.md`. Detalle operativo (endpoint, tipo de computo usado) en `infra/oci/README.md`, pendiente de completar con los datos exactos del despliegue.
 
-- **OCI Compute** o **Container Instances** para backend y ML.
-- **OCI Object Storage** para datasets, modelos y reportes.
-- **OCI API Gateway** en evolucion posterior para exposicion controlada.
-- **OCI Vault** para secretos y credenciales.
-- **OCI Logging / Monitoring** para observabilidad basica.
-- **Autonomous Database** o base gestionada equivalente si el tiempo lo permite.
+### 8.1 Servicios OCI recomendados (vision objetivo, no todos implementados aun)
+
+- **OCI Compute** o **Container Instances** para backend y ML. — *usado en el primer despliegue, ver `infra/oci/README.md`.*
+- **OCI Object Storage** para datasets, modelos y reportes. — *no implementado aun; el modelo se entrena dentro de la imagen (ver DA-05, nota 2026-08-05).*
+- **OCI API Gateway** en evolucion posterior para exposicion controlada. — *no implementado.*
+- **OCI Vault** para secretos y credenciales. — *no implementado.*
+- **OCI Logging / Monitoring** para observabilidad basica. — *no implementado.*
+- **Autonomous Database** o base gestionada equivalente si el tiempo lo permite. — *no implementado; el MVP no tiene persistencia de historico (el frontend guarda el historial solo en el navegador via `useHistorial.js`).*
 
 ### 8.2 Arquitectura de despliegue OCI para MVP
 
-1. Frontend desplegado como sitio estatico o servicio web ligero.
-2. Backend Spring Boot desplegado en una instancia o contenedor.
-3. Servicio ML desplegado por separado en otra instancia o contenedor.
-4. Base de datos accesible por red privada o configuracion segura controlada.
-5. Object Storage como repositorio comun de datasets y modelos.
+1. Frontend desplegado como sitio estatico o servicio web ligero. — *implementado como contenedor Nginx (`frontend/Dockerfile`), no como sitio estatico en Object Storage.*
+2. Backend Spring Boot desplegado en una instancia o contenedor. — *implementado.*
+3. Servicio ML desplegado por separado en otra instancia o contenedor. — *implementado.*
+4. Base de datos accesible por red privada o configuracion segura controlada. — *no implementado, ver 8.1.*
+5. Object Storage como repositorio comun de datasets y modelos. — *no implementado, ver 8.1.*
 
-### 8.3 Secuencia operativa recomendada
+### 8.3 Secuencia operativa recomendada (vision objetivo)
 
-1. El equipo de datos entrena y publica el modelo.
-2. El artefacto se almacena en Object Storage.
-3. El servicio ML carga la version aprobada.
-4. Spring Boot invoca la inferencia.
-5. El resultado se persiste y se expone a React.
+1. El equipo de datos entrena y publica el modelo. — *hoy el entrenamiento ocurre dentro del build de la imagen Docker (`ml-service/train.py` ejecutado en `ml-service/Dockerfile`), no como publicacion separada a Object Storage.*
+2. El artefacto se almacena en Object Storage. — *no implementado; el `.pkl` vive solo dentro de la imagen del contenedor, no esta versionado en el repositorio ni en Object Storage (deuda tecnica).*
+3. El servicio ML carga la version aprobada. — *implementado, pero "version aprobada" hoy es simplemente "la que resulto del ultimo build".*
+4. Spring Boot invoca la inferencia. — *implementado (`MlClient.java` → `POST /predict`, ver `architecture/contracts/CONTRATO_INTERNO_BACKEND_ML.md`).*
+5. El resultado se persiste y se expone a React. — *el resultado se expone a React; la persistencia de historico sigue sin implementar (ver punto 4 de 8.2).*
 
 ## 9. Seguridad y gobierno minimo viable
 

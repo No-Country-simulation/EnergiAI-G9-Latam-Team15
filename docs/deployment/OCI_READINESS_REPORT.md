@@ -1,9 +1,21 @@
 # OCI Readiness Report — EnergiAI
 
-**Fecha:** 2026-07-31
+**Fecha original:** 2026-07-31
 **Pregunta central:** ¿Puede EnergiAI desplegar en OCI hoy?
 
-## Veredicto
+## Veredicto actualizado — 2026-08-05
+
+# SÍ — ya desplegado.
+
+Este documento se auto-advertía: *"debe re-emitirse, no asumirse, cada vez que se cierren las Tareas #4, #5 o #6"*. Esas tareas se cerraron. Las 3 imágenes (`energiai-frontend`, `energiai-backend`, `energiai-ml`, tag `:v1`) están publicadas en OCIR y el stack corre en OCI, confirmado con integración real (no mock) en la demo del 2026-08-04 (`meetings/ActaReunion-008-ENERGIAI.md`). Detalle operativo en `infra/oci/README.md` (creado 2026-08-05 — algunos campos, como la URL pública exacta, siguen pendientes de que Bernardo los documente).
+
+**Camino mínimo (§ "Camino mínimo hacia un SÍ" más abajo): completado** — backend y ML responden `/health`, y `POST /api/v1/analisis-energetico` devuelve una respuesta generada por el modelo real.
+
+**Pendiente aún, no bloqueante para el veredicto SÍ:** OCI Object Storage para modelo/dataset, OCI Logging/Monitoring, Vault, persistencia de histórico — ver `architecture/03-Arquitectura-Empresarial-EnergiAI.md` §8 (actualizado 2026-08-05).
+
+---
+
+## Veredicto original — 2026-07-31 (histórico, superado)
 
 # NO.
 

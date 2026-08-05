@@ -1,12 +1,18 @@
 # Resumen Ejecutivo — Auditoría Técnica Sprint 2
 
-**Fecha:** 2026-07-31
+**Fecha original:** 2026-07-31
 **Audiencia:** Product Owner, equipo EnergiAI, jurado/evaluadores NoCountry
 **Basado en:** auditoría técnica completa del repositorio (`docs/governance/AUDITORIA_PROYECTO_v1.md`, `docs/architecture/AUDITORIA_BACKEND.md`, `docs/architecture/AUDITORIA_ML.md`), contrastada con `meetings/ActaReunion-006-ENERGIAI.md`, `planning/05-Backlog-Sprint2-ENERGIAI.md` y `architecture/contracts/API_CONTRACT_V1.md`.
 
 ---
 
-## En una frase
+## ADENDA — 2026-08-05 — En una frase, actualizado
+
+EnergiAI **completó el flujo end-to-end y ya está desplegado en OCI** (imágenes `:v1` en OCIR, integración real backend↔ML verificada en demo el 2026-08-04, ver `meetings/ActaReunion-008-ENERGIAI.md`). Los "hallazgos críticos" 1, 2 y 3 de este resumen (backend vacío, ML vacío, infraestructura vacía) **están resueltos**. Siguen abiertos: el hallazgo 6 (motor de recomendaciones sin dueño — ahora tiene dueño decidido por ADR-002 pero sin implementar), deuda de tests (backend y ML sin tests), y un hallazgo nuevo no cubierto en la auditoría original: `tipo_inmueble` del contrato no coincidía con las categorías reales del modelo (corregido en `API_CONTRACT_V1.md`). Detalle completo de qué se resolvió y qué sigue pendiente en `docs/local/revisiones/AUDITORIA_DOCUMENTAL_2026-08-05.md` (documento local, no versionado).
+
+El resto de este documento se conserva sin modificar como registro histórico de la auditoría del 2026-07-31 — sección "En una frase" original a continuación.
+
+## En una frase (registro histórico, 2026-07-31)
 
 EnergiAI tiene **documentación, arquitectura y dataset de nivel sólido**, un **frontend funcional**, pero **cero código en backend y ML, y cero infraestructura**, lo que hace que el despliegue en OCI (Tarea #10) sea hoy inalcanzable — no por limitación de OCI, sino porque no existe todavía qué desplegar.
 

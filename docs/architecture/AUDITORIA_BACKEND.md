@@ -6,6 +6,21 @@
 
 ---
 
+## ADENDA — 2026-08-05
+
+**Este hallazgo quedó superado.** El backend existe, compila y está desplegado en OCI (verificado en `meetings/ActaReunion-007-ENERGIAI.md` y `ActaReunion-008-ENERGIAI.md`, demo end-to-end 2026-08-04). Estado real actual:
+
+- `backend/pom.xml` existe (Spring Boot 3.2.3, Java 21) y el proyecto compila.
+- `POST /api/v1/analisis-energetico` y `GET /health` (vía Actuator) están implementados — ver `backend/src/main/java/com/energiai/`.
+- El mismatch de ruta señalado en la §4 original **se corrigió** — ver `frontend/src/services/apiService.js` y el fix de proxy Nginx en el commit `556f9ce`.
+- Persistencia de histórico y los 4 recursos REST adicionales (`/users`, `/consumptions`, etc.) del §3 original **siguen sin implementar** — deuda vigente, no bloqueante para el MVP.
+- Tests unitarios en `backend/src/test/java/` **siguen sin existir** (carpeta vacía) — hallazgo del §5 original aún vigente.
+- Diagrama de componentes actualizado en `diagrams/03-C4-Nivel-3-Componentes.md`.
+
+El resto de este documento se conserva sin modificar como registro histórico de la auditoría del 2026-07-31.
+
+---
+
 ## 1. Estado actual (evidencia)
 
 ```text
