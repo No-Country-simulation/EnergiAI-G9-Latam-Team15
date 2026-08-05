@@ -254,6 +254,14 @@ Indice recomendado:
 - [Dataset — Informe de Consolidacion](docs/data-engineering/INFORME_CONSOLIDACION_DATASET.md)
 - [Dataset — Nota de Arquitectura y Trazabilidad](docs/data-engineering/NOTA_ARQUITECTO_Dataset_v2.md)
 
+### Auditoria tecnica y despliegue OCI (Sprint 2)
+
+- [Resumen Ejecutivo de Auditoria Sprint 2](docs/governance/RESUMEN_EJECUTIVO_AUDITORIA_SPRINT2.md) — lectura recomendada primero
+- [OCI Readiness Report](docs/deployment/OCI_READINESS_REPORT.md) — veredicto: que falta, quien es responsable, que tarea del backlog lo respalda
+- [Plan de Despliegue OCI v1](docs/deployment/PLAN_DESPLIEGUE_OCI_v1.md)
+- [Checklist operativo OCI](docs/deployment/CHECKLIST_OCI.md)
+- [Matriz de Dependencias Sprint 2](docs/governance/MATRIZ_DEPENDENCIAS_SPRINT2.md)
+
 ## Equipo
 
 | Integrante | Rol oficial inicial |

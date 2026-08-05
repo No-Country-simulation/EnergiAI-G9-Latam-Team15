@@ -25,6 +25,30 @@
 - `docs/02-Revision-Arquitectonica-y-Version-Optimizada.md`
 - `docs/03-Guia-Maestra-Proyecto-EnergiAI.md`
 
+### Auditoria Tecnica y Despliegue OCI (Sprint 2)
+
+> Documentos diagnosticos (no normativos): evaluan el estado real del codigo frente a la especificacion de `architecture/` y `planning/`. Ver `docs/architecture/README.md` para la distincion con la carpeta `architecture/` de la raiz.
+
+- `docs/governance/RESUMEN_EJECUTIVO_AUDITORIA_SPRINT2.md` — lectura recomendada primero (sintesis ejecutiva)
+- `docs/governance/AUDITORIA_PROYECTO_v1.md`
+- `docs/architecture/AUDITORIA_BACKEND.md`
+- `docs/architecture/AUDITORIA_ML.md`
+- `docs/architecture/MOTOR_RECOMENDACIONES_v1.md`
+- `docs/deployment/OCI_READINESS_REPORT.md`
+- `docs/deployment/PLAN_DESPLIEGUE_OCI_v1.md`
+- `docs/deployment/CHECKLIST_OCI.md`
+- `docs/governance/MATRIZ_DEPENDENCIAS_SPRINT2.md`
+- `docs/governance/ENTREGABLES_NOCOUNTRY.md`
+
+### Continuidad Operativa 48h y Despliegue del Fin de Semana (Sprint 2)
+
+> Generados 2026-07-31 para sostener el proyecto sin bloqueos si algun integrante no participa durante el fin de semana de despliegue. Empezar por `ESTADO_OPERATIVO_SPRINT2.md`.
+
+- `docs/governance/ESTADO_OPERATIVO_SPRINT2.md` — matriz RAG por area, dependencias criticas y flujo operativo Viernes-Lunes
+- `docs/governance/RIESGOS_OPERATIVOS_SPRINT2.md` — riesgos de continuidad con probabilidad de incumplimiento e impacto sobre OCI
+- `docs/deployment/PLAN_CONTINGENCIA_OCI.md` — que hacer si ML/Backend/Frontend/OCI fallan, decisiones pre-autorizadas por escenario
+- `docs/governance/CHECKLIST_DOMINGO_DESPLIEGUE.md` — guion operativo del dia de despliegue, en bloques horarios
+
 ### Data Engineering
 
 - `docs/data-engineering/Dataset_Research_Report_v1.md`
@@ -62,6 +86,8 @@
 7. Actas de reuniones y decisiones del Sprint 0.
 8. Roadmap tecnico.
 9. Riesgos y gestion arquitectonica.
+10. Backlog Sprint 2 (`planning/05-Backlog-Sprint2-ENERGIAI.md`).
+11. Auditoria tecnica Sprint 2 — empezar por `docs/governance/RESUMEN_EJECUTIVO_AUDITORIA_SPRINT2.md`, luego `docs/deployment/OCI_READINESS_REPORT.md`.
 
 ---
 
@@ -75,6 +101,12 @@ Los documentos considerados fuente oficial de referencia para Sprint 1 son:
 - `docs/01-Estructura-Repositorio-y-GitFlow.md`
 - `planning/03-Roadmap-Tecnico-5-Semanas.md`
 - `planning/04-Gestion-de-Riesgos-Arquitectonicos.md`
+
+Documentos rectores adicionales para Sprint 2 (auditoria y despliegue OCI):
+
+- `planning/05-Backlog-Sprint2-ENERGIAI.md`
+- `docs/governance/RESUMEN_EJECUTIVO_AUDITORIA_SPRINT2.md`
+- `docs/deployment/OCI_READINESS_REPORT.md`
 
 ---
 
