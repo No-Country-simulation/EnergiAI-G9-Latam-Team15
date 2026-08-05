@@ -81,12 +81,12 @@ Diagrama completo de contenedores: [`diagrams/02-C4-Nivel-2-Contenedores.md`](di
 
 ## Equipo
 
-Equipo activo a partir del [Acta 007](meetings/ActaReunion-007-ENERGIAI.md) (2026-08-03): 7 integrantes.
+Equipo activo con 7 integrantes.
 
 | Integrante | Rol |
 |---|---|
 | Luis Angel Chavez Mejia | Product Owner |
-| Bernardo Gomez | Software Architect |
+| Bernardo Adolfo Gómez Montoya| Software Architect |
 | Harrinson Villabona | Data Scientist |
 | Carlos Fabian Mesa | Backend Developer |
 | Elvis Trinidad | Backend Developer |
