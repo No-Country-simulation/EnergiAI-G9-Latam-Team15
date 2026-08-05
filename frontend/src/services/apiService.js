@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 
 function generarRecomendaciones(consumo_kwh, uso_horario_pico, horas_alto_consumo) {
   const recomendaciones = [];
@@ -76,7 +76,7 @@ function generarMockResponse(datos) {
 
 export async function analizarConsumo(datos) {
   try {
-    const response = await fetch(`${API_URL}/analisis-energetico`, {
+    const response = await fetch(`${API_URL}/api/v1/analisis-energetico`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datos),
