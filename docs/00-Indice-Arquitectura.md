@@ -1,6 +1,7 @@
 # Indice Maestro de Documentacion Arquitectonica
 
-**Fecha:** 2026-07-16  
+**Fecha:** 2026-07-16
+**Última actualización:** 2026-08-05 — proyecto ya desplegado en OCI; se agregan ADRs, contrato interno Backend↔ML, diagramas C4 Nivel 3/secuencia y actas 006-008.
 **Objetivo:** Consolidar la documentacion principal de EnergiAI como referencia oficial para el equipo durante el Hackathon Oracle + Alura + NoCountry, garantizando trazabilidad, coherencia arquitectonica y alineacion entre las diferentes areas del proyecto.
 
 ---
@@ -12,12 +13,20 @@
 - `architecture/01-Vision-General.md`
 - `architecture/02-Arquitectura-Propuesta.md`
 - `architecture/03-Arquitectura-Empresarial-EnergiAI.md`
-- `architecture/contracts/API_CONTRACT_V1.md`
+- `architecture/contracts/API_CONTRACT_V1.md` — contrato Frontend↔Backend
+- `architecture/contracts/CONTRATO_INTERNO_BACKEND_ML.md` — contrato Backend↔ML Service (nuevo, 2026-08-05)
+
+### Decisiones arquitectónicas (ADR)
+
+- `architecture/decisions/ADR-001-contrato-integracion-v1.md`
+- `architecture/decisions/ADR-002-motor-recomendaciones-backend.md`
 
 ### Diagramas
 
 - `diagrams/01-C4-Nivel-1-Contexto.md`
-- `diagrams/02-C4-Nivel-2-Contenedores.md`
+- `diagrams/02-C4-Nivel-2-Contenedores.md` — actualizado 2026-08-05 a la arquitectura real desplegada
+- `diagrams/03-C4-Nivel-3-Componentes.md` — nuevo, componentes del Backend
+- `diagrams/04-Diagrama-Secuencia-Analisis-Energetico.md` — nuevo, flujo end-to-end + camino de fallo
 
 ### Gobierno Tecnico y Arquitectura
 
@@ -64,6 +73,9 @@
 - `meetings/ActaReunion-003-ENERGIAI.md`
 - `meetings/ActaReunion-004-ENERGIAI.md`
 - `meetings/ActaReunion-005-ENERGIAI.md`
+- `meetings/ActaReunion-006-ENERGIAI.md`
+- `meetings/ActaReunion-007-ENERGIAI.md` — demo end-to-end local + imágenes en OCIR
+- `meetings/ActaReunion-008-ENERGIAI.md` — reparto de mejoras post-demo, despliegue OCI en curso
 
 ### Planeacion
 

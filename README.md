@@ -59,6 +59,11 @@ La arquitectura del proyecto esta documentada en detalle en los siguientes artef
 - [Arquitectura Empresarial y MVP](architecture/03-Arquitectura-Empresarial-EnergiAI.md)
 - [C4 Nivel 1 - Contexto](diagrams/01-C4-Nivel-1-Contexto.md)
 - [C4 Nivel 2 - Contenedores](diagrams/02-C4-Nivel-2-Contenedores.md)
+- [C4 Nivel 3 - Componentes del Backend](diagrams/03-C4-Nivel-3-Componentes.md)
+- [Diagrama de Secuencia - Analisis Energetico](diagrams/04-Diagrama-Secuencia-Analisis-Energetico.md)
+- [Contrato de Integracion v1 (Frontend↔Backend)](architecture/contracts/API_CONTRACT_V1.md)
+- [Contrato Interno (Backend↔ML Service)](architecture/contracts/CONTRATO_INTERNO_BACKEND_ML.md)
+- [ADR-001 - Contrato de Integracion](architecture/decisions/ADR-001-contrato-integracion-v1.md) / [ADR-002 - Motor de Recomendaciones](architecture/decisions/ADR-002-motor-recomendaciones-backend.md)
 - [Revision Arquitectonica y Version Optimizada](docs/02-Revision-Arquitectonica-y-Version-Optimizada.md)
 - [Guia Maestra del Proyecto](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
 
@@ -188,25 +193,25 @@ Referencia:
 
 ## OCI
 
-OCI se utiliza como habilitador pragmatica del MVP, priorizando:
+**Estado (2026-08-05): desplegado.** Las 3 imagenes del stack (`energiai-frontend`, `energiai-backend`, `energiai-ml`, tag `:v1`) estan publicadas en OCI Container Registry (OCIR) y el sistema corre integrado en OCI — confirmado en demo end-to-end el 2026-08-04 ([Acta 008](meetings/ActaReunion-008-ENERGIAI.md)). Detalle operativo (URL, tipo de computo) en [`infra/oci/README.md`](infra/oci/README.md).
+
+OCI se utilizo como habilitador pragmatico del MVP, priorizando:
 
 - despliegue temprano,
-- almacenamiento de datasets y modelos,
 - evidencia real de integracion cloud,
 - soporte a la demo final.
 
-Servicios OCI recomendados:
+Servicios OCI usados en el primer despliegue: **Container Registry (OCIR)** y **Compute/Container Instances**. Los siguientes siguen como vision objetivo, no implementados aun (ver [Arquitectura Empresarial y MVP](architecture/03-Arquitectura-Empresarial-EnergiAI.md) §8):
 
-- **OCI Compute** o **Container Instances**
-- **OCI Object Storage**
-- **OCI Logging**
-- **OCI Monitoring**
-- **OCI Vault** si el tiempo del hackathon lo permite
+- **OCI Object Storage** para datasets y modelos
+- **OCI Logging** y **OCI Monitoring**
+- **OCI Vault**
 
 Referencia:
 
 - [Arquitectura Empresarial y MVP](architecture/03-Arquitectura-Empresarial-EnergiAI.md)
 - [Guia Maestra del Proyecto](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
+- [Despliegue OCI — infra/oci/README.md](infra/oci/README.md)
 
 ## Dataset
 
@@ -264,16 +269,19 @@ Indice recomendado:
 
 ## Equipo
 
+Equipo activo a partir del [Acta 007](meetings/ActaReunion-007-ENERGIAI.md) (2026-08-03): 7 integrantes.
+
 | Integrante | Rol oficial inicial |
 |---|---|
 | Luis Angel Chavez Mejia | Product Owner |
 | Bernardo Gomez | Software Architect |
 | Harrinson Villabona | Data Scientist |
-| Anayely Reyes | Data Engineer |
 | Carlos Fabian Mesa | Backend Developer |
 | Elvis Trinidad | Backend Developer |
-| Magno Cristian | Data Analyst |
+| Magno Cristian Coronel | Data Analyst |
 | Alonso Carbajal | Full Stack Developer |
+
+> **Nota (2026-08-05):** Anayely Reyes (Data Engineer) no continuo en la simulacion ([Acta 007](meetings/ActaReunion-007-ENERGIAI.md) §1). La redistribucion formal de su rol quedo pendiente como Tarea #16 en [`planning/05-Backlog-Sprint2-ENERGIAI.md`](planning/05-Backlog-Sprint2-ENERGIAI.md) — sin decision registrada aun.
 
 Referencia:
 

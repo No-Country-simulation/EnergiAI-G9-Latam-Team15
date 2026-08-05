@@ -43,6 +43,8 @@ Responsabilidades:
 - ETL
 - Transformación de datos
 
+> **Nota (2026-08-05):** según `meetings/ActaReunion-007-ENERGIAI.md` §1 (2026-08-03), Anayely no continuó en la simulación y el equipo se reorganizó a 7 integrantes activos. La redistribución formal de este rol sigue pendiente (Tarea #16 de `planning/05-Backlog-Sprint2-ENERGIAI.md`) — hasta que se decida, las responsabilidades de limpieza/ETL las ha venido cubriendo el propio pipeline de datos ya construido (`docs/data-engineering/build_hibrido_final.py`, `dataset_maestro_v2.py`).
+
 ---
 
 ## Backend Developers

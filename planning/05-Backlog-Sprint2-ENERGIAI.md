@@ -3,7 +3,35 @@
 ### NoCountry G9 LATAM
 **Propuesto por:** Bernardo Gómez Montoya — Software / Solution Architect
 **Fecha:** 2026-07-28
-**Estado:** Propuesta para revisión y aprobación del Product Owner
+**Estado:** Propuesta para revisión y aprobación del Product Owner (aprobación formal de la Tarea #15 sigue sin registrarse por escrito — ver adenda)
+
+---
+
+## ADENDA — 2026-08-05 — Estado real de ejecución
+
+El equipo ejecutó y superó este backlog en la práctica (demo end-to-end verificada 2026-08-04, `meetings/ActaReunion-008-ENERGIAI.md`), aunque la Tarea #15 (aprobación formal por el PO) nunca se cerró explícitamente por escrito.
+
+| # | Tarea | Estado 2026-08-05 |
+|---|---|---|
+| 1 | Dataset final | ✅ Completa |
+| 2 | Entrenar modelo baseline | ✅ Completa |
+| 3 | Serializar modelo | ⚠️ Parcial — se serializa en cada build de Docker, no como artefacto versionado independiente (deuda técnica, ver `docs/architecture/AUDITORIA_ML.md`) |
+| 4 | Endpoint backend | ✅ Completa |
+| 5 | Servicio Python `/predict` | ✅ Completa |
+| 6 | Backend ↔ ML real | ✅ Completa |
+| 7 | Frontend ↔ Backend real | ✅ Completa |
+| 8 | Validación de payloads | ✅ Completa |
+| 9 | `GET /health` | ✅ Completa |
+| 10 | Despliegue OCI | ✅ Completa en la práctica — falta documentar URL pública en `infra/oci/README.md` |
+| 11 | Persistencia básica de resultados | 🔴 No implementada — historial vive solo en el navegador (`frontend/src/hooks/useHistorial.js`) |
+| 12 | OCI Object Storage | 🔴 No implementada |
+| 13 | Logs estructurados + smoke test | 🔴 No implementada |
+| 14 | Revisión UX con datos reales | 🟡 En curso — Acta 008 asigna correcciones de ortografía y legibilidad a Alonso |
+| 15 | Aprobar backlog formalmente | 🔴 Sigue sin cerrarse por escrito por el PO |
+| 16 | Redistribuir rol de Anayely | 🔴 Sigue sin decidirse — ver `planning/01-Roles.md` |
+| 17 | Sincronizar `develop` | ✅ Mantenido durante todo Sprint 2 |
+
+**Sprint 3 implícito ya en marcha:** según `meetings/ActaReunion-008-ENERGIAI.md`, el equipo pasó a mejoras de UI (ortografía, legibilidad de gráfica) y de modelo/recomendaciones — no cubierto por este backlog, candidato a documentarse como Backlog Sprint 3 si el PO lo decide.
 
 > Este backlog se construye sobre los objetivos ya definidos para Semana 2
 > en `planning/03-Roadmap-Tecnico-5-Semanas.md` ("Vertical slice técnico"),
