@@ -1,7 +1,19 @@
 # Checklist Operativo — Despliegue OCI (Tarea #10, Sprint 2)
 
-**Fecha:** 2026-07-31
+**Fecha original:** 2026-07-31
 **Uso:** checklist de ejecución, complementario a `docs/deployment/PLAN_DESPLIEGUE_OCI_v1.md`. Marcar cada ítem solo con evidencia verificable (commit, screenshot, log o URL), no por percepción de avance.
+
+## ADENDA — 2026-08-05
+
+La Tarea #10 avanzó sustancialmente pero **este checklist no se fue marcando en su momento** — se deja así (sin marcar retroactivamente casilla por casilla) porque no hay evidencia capturada para cada ítem individual, solo el resultado agregado verificado en `meetings/ActaReunion-007-ENERGIAI.md` / `ActaReunion-008-ENERGIAI.md`. Resumen honesto del avance real:
+
+- **Fase 0 (prerrequisitos de código): completa.** `pom.xml`, endpoints, `requirements.txt`, modelo entrenado, Dockerfiles y `docker-compose.yml` — todo existe y funciona localmente (verificar: `docker-compose.yml` en la raíz del repo).
+- **Fase 1 (cuenta y proyecto OCI): completa** en la práctica (hay tenancy, se pudo hacer login y push a OCIR), pero sin documentación versionada de compartment/VCN/IAM exactos — ver `infra/oci/README.md` §2-3, con campos `[COMPLETAR]`.
+- **Fase 2 (registro de imágenes): completa y verificable.** Las 3 imágenes están en OCIR (`bog.ocir.io/axvu1ir8dwvf/...`), ver `infra/oci/README.md` §1.
+- **Fase 3 (despliegue): completa en la práctica** (demo funcionando desde OCI el 2026-08-04) pero **sin la URL/evidencia documentada** que pide esta fase — pendiente que Bernardo la agregue a `infra/oci/README.md`.
+- **Fase 4 (observabilidad y evidencia): sigue pendiente.** No hay OCI Logging habilitado, no hay capturas trasladadas a `docs/governance/ENTREGABLES_NOCOUNTRY.md`.
+
+**Recomendación:** antes de dar por cerrada formalmente la Tarea #10 en el backlog, completar `infra/oci/README.md` con la URL pública y capturar al menos la Fase 4.
 
 ---
 

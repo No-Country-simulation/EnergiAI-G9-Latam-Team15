@@ -7,7 +7,20 @@
 
 ---
 
-## 1. Estado por entregable
+## ADENDA — 2026-08-05
+
+Actualización de los ítems que cambiaron de estado desde el 2026-07-31 (tabla original conservada abajo, sin editar, para trazabilidad):
+
+| Entregable | Estado 2026-08-05 | Evidencia |
+|---|---|---|
+| Frontend desplegado | 🟢 Desplegado | Imagen `energiai-frontend:v1` en OCIR, corriendo en OCI (Nginx) — ver `infra/oci/README.md` |
+| Backend desplegado | 🟢 Desplegado | Imagen `energiai-backend:v1` en OCIR, integración real verificada en demo (`meetings/ActaReunion-008-ENERGIAI.md`) |
+| OCI (evidencia de uso) | 🟡 Parcial | Imágenes en OCIR confirmadas; falta URL pública documentada y capturas/logs formales — ver `infra/oci/README.md` §4 y §7 |
+| Arquitectura | 🟢 Fuerte, gap cerrado | C4 Nivel 3 y diagrama de secuencia creados 2026-08-05 (`diagrams/03-*`, `diagrams/04-*`); 2 ADR agregados |
+| Figma | ❓ Sigue sin evidencia | Sin cambios — sigue pendiente que Alonso confirme el enlace |
+| Video demostrativo | ❓ Sigue sin evidencia | El flujo end-to-end ya está integrado desde el 2026-08-04 — ya no hay motivo técnico para seguir esperando a grabarlo |
+
+## 1. Estado por entregable (registro original, 2026-07-31 — ver adenda arriba para estado vigente)
 
 | Entregable | Estado | Evidencia | Acción pendiente |
 |---|---|---|---|

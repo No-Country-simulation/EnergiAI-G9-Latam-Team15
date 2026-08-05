@@ -6,6 +6,20 @@
 
 ---
 
+## ADENDA — 2026-08-05
+
+**Este hallazgo quedó parcialmente superado.** El servicio ML existe, se entrena y sirve inferencia, y está desplegado en OCI (verificado en demo end-to-end 2026-08-04, `meetings/ActaReunion-008-ENERGIAI.md`). Estado real actual:
+
+- `ml-service/requirements.txt`, `train.py` e `inference.py` existen. `POST /predict` y `GET /health` implementados y funcionando — ver `architecture/contracts/CONTRATO_INTERNO_BACKEND_ML.md` (nuevo, documenta este contrato que antes no existía).
+- **Sigue sin resolverse el hallazgo central de este documento (§2):** no hay un artefacto de modelo versionado de forma reproducible. El modelo se entrena *dentro del build de Docker* (`RUN python train.py` en `ml-service/Dockerfile`) — es reproducible en el sentido de que el build siempre lo regenera, pero el `.pkl` resultante nunca se serializa a `ml-service/models/` ni a Object Storage. Esa carpeta sigue vacía.
+- `ml-service/notebooks/` y `ml-service/tests/` **siguen vacías** — no hay notebook de exploración ni tests del servicio.
+- La estructura `ml-service/app/` descrita en `ml-service/README.md` **nunca se usó** — el código real vive suelto en `ml-service/` (`train.py`, `inference.py`).
+- **Hallazgo nuevo detectado el 2026-08-05, no cubierto en la auditoría original:** el modelo solo soporta 2 categorías de `tipo_inmueble` (`Casa`, `Pequeño establecimiento`), mientras el contrato original definía 5. Corregido en `architecture/contracts/API_CONTRACT_V1.md` — ver `architecture/decisions/ADR-001-contrato-integracion-v1.md`.
+
+El resto de este documento se conserva sin modificar como registro histórico de la auditoría del 2026-07-31.
+
+---
+
 ## 1. Estado actual (evidencia)
 
 ```text

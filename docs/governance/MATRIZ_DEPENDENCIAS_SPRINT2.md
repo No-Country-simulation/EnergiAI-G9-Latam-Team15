@@ -1,7 +1,28 @@
 # Matriz de Dependencias — Backlog Sprint 2
 
-**Fecha:** 2026-07-31
+**Fecha original:** 2026-07-31
 **Fuente:** `planning/05-Backlog-Sprint2-ENERGIAI.md` (propuesta) contrastada con `meetings/ActaReunion-006-ENERGIAI.md` (estado reportado en la reunión del 2026-07-30) y con el estado real observado en el repositorio en esta auditoría.
+
+## ADENDA — 2026-08-05
+
+El camino crítico completo (Tareas 1→2→3→5→4→6→10 de la sección 2) **se completó** entre el 2026-07-31 y el 2026-08-04. Estado real hoy:
+
+| # | Tarea | Estado 2026-08-05 |
+|---|---|---|
+| 1 | Dataset final | ✅ Sin cambios, sigue vigente |
+| 2 | Entrenar modelo baseline | ✅ Completa — `ml-service/train.py` |
+| 3 | Serializar modelo | ⚠️ Parcial — se serializa en cada build de Docker, no como artefacto versionado independiente (ver adenda en `docs/architecture/AUDITORIA_ML.md`) |
+| 4 | Endpoint backend | ✅ Completa — `AnalisisEnergeticoController` |
+| 5 | Servicio Python `/predict` | ✅ Completa — `ml-service/inference.py` |
+| 6 | Backend ↔ ML real | ✅ Completa y verificada en demo (`meetings/ActaReunion-007/008`) |
+| 7 | Frontend ↔ Backend real | ✅ Completa |
+| 8 | Validación de payloads | ✅ Completa — Bean Validation en `AnalisisRequestDTO` |
+| 9 | `GET /health` | ✅ Completa — vía Spring Actuator |
+| 10 | Despliegue OCI | ✅ Completa en la práctica — ver `infra/oci/README.md` |
+| 15 | Aprobar backlog formalmente | ⚠️ Sigue sin cerrarse formalmente por el PO, pese a que el equipo ya ejecutó todo — ver adenda en `planning/05-Backlog-Sprint2-ENERGIAI.md` |
+| 16 | Redistribuir rol de Anayely | ⚠️ Sigue sin decidirse — ver nota en `planning/01-Roles.md` |
+
+Detalle completo del cierre en `planning/05-Backlog-Sprint2-ENERGIAI.md` (adenda 2026-08-05).
 
 > Nota metodológica: la columna "Estado real (repo)" refleja lo verificable en `develop` a 2026-07-31, no lo declarado en actas. Donde ambos difieren, se marca explícitamente — es la señal más importante de esta matriz.
 
