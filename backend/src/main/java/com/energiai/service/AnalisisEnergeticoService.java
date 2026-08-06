@@ -27,14 +27,17 @@ public class AnalisisEnergeticoService {
 
         String categoria;
         double probabilidad;
+        double scoreEficiencia;
         try {
             MlClient.Prediccion prediccion = mlClient.predecir(request);
             categoria = prediccion.categoria();
             probabilidad = prediccion.probabilidad();
+            scoreEficiencia = prediccion.scoreEficiencia();
         } catch (Exception e) {
             log.warn("ml-service no disponible, usando respuesta mock de fallback: {}", e.getMessage());
             categoria = "Ineficiente";
             probabilidad = 0.81;
+            scoreEficiencia = 0.0;
         }
 
         List<String> recomendaciones = generarRecomendaciones(request, categoria);
@@ -43,6 +46,8 @@ public class AnalisisEnergeticoService {
         double ahorroMedio = round2(costoEstimado * 0.05);
         double ahorroAlto = round2(costoEstimado * 0.08);
 
+        double prioridad = request.consumoKwh() * pesoCategoria(categoria);
+
         return new AnalisisResponseDTO(
                 categoria,
                 probabilidad,
@@ -50,12 +55,22 @@ public class AnalisisEnergeticoService {
                 costoEstimado,
                 ahorroConservador,
                 ahorroMedio,
-                ahorroAlto
+                ahorroAlto,
+                scoreEficiencia,
+                prioridad
         );
     }
 
     private double round2(double valor) {
         return Math.round(valor * 100.0) / 100.0;
+    }
+
+    private double pesoCategoria(String categoria) {
+        return switch (categoria) {
+            case "Ineficiente" -> 1.0;
+            case "Moderado" -> 0.4;
+            default -> 0.0;
+        };
     }
 
     private List<String> generarRecomendaciones(AnalisisRequestDTO request, String categoria) {
