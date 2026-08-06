@@ -18,5 +18,11 @@ public record AnalisisResponseDTO(
         Double ahorroMedio,
 
         @JsonProperty("ahorro_potencial_alto")
-        Double ahorroAlto
+        Double ahorroAlto,
+
+        @JsonProperty("score_eficiencia")
+        Double scoreEficiencia,
+
+        @JsonProperty("prioridad")
+        Double prioridad
 ) {}
