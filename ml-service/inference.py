@@ -88,6 +88,7 @@ class RespuestaPrediccion(BaseModel):
     categoria: str
     probabilidad: float
     probabilidades: dict[str, float]
+    score_eficiencia: float
 
 
 # ---------- Endpoints ----------
@@ -126,8 +127,14 @@ def predict(perfil: PerfilConsumo) -> RespuestaPrediccion:
     probabilidades = {str(c): round(float(p), 4) for c, p in zip(clases, proba_arr)}
     probabilidad = round(float(max(proba_arr)), 4)
 
+    PESOS_SCORE = {"Eficiente": 100, "Moderado": 50, "Ineficiente": 0}
+    score_eficiencia = round(
+        sum(PESOS_SCORE.get(c, 0) * p for c, p in probabilidades.items()), 2
+    )
+
     return RespuestaPrediccion(
         categoria=categoria,
         probabilidad=probabilidad,
         probabilidades=probabilidades,
+        score_eficiencia=score_eficiencia,
     )
