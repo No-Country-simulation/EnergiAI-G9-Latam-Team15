@@ -31,6 +31,8 @@ META_PATH = MODELS_DIR / "model_metadata.json"
 # Orden EXACTO de features que espera el pipeline (igual que en train.py y el contrato)
 FEATURES = ["consumo_kwh", "cantidad_equipos", "horas_alto_consumo", "uso_horario_pico", "tipo_inmueble"]
 
+PESOS_SCORE = {"Eficiente": 100, "Moderado": 50, "Ineficiente": 0}
+
 app = FastAPI(
     title="EnergiAI — Servicio de Inferencia",
     description="Clasifica el perfil de consumo energético en Eficiente / Moderado / Ineficiente.",
@@ -127,7 +129,6 @@ def predict(perfil: PerfilConsumo) -> RespuestaPrediccion:
     probabilidades = {str(c): round(float(p), 4) for c, p in zip(clases, proba_arr)}
     probabilidad = round(float(max(proba_arr)), 4)
 
-    PESOS_SCORE = {"Eficiente": 100, "Moderado": 50, "Ineficiente": 0}
     score_eficiencia = round(
         sum(PESOS_SCORE.get(c, 0) * p for c, p in probabilidades.items()), 2
     )
