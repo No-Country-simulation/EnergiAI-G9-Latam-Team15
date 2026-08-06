@@ -9,5 +9,14 @@ public record AnalisisResponseDTO(
         List<String> recomendaciones,
 
         @JsonProperty("costo_estimado_mensual")
-        Double costoEstimadoMensual
+        Double costoEstimadoMensual,
+
+        @JsonProperty("ahorro_potencial_conservador")
+        Double ahorroConservador,
+
+        @JsonProperty("ahorro_potencial_medio")
+        Double ahorroMedio,
+
+        @JsonProperty("ahorro_potencial_alto")
+        Double ahorroAlto
 ) {}
