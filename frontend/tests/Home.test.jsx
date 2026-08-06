@@ -22,7 +22,7 @@ describe("Home", () => {
 
   it("renderiza la seccion hero", () => {
     render(<Home />);
-    expect(screen.getByRole("heading", { name: /Analisis Energetico/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Análisis Energético/i })).toBeInTheDocument();
     expect(screen.getByText(/Ingrese los datos/i)).toBeInTheDocument();
   });
 
@@ -34,7 +34,7 @@ describe("Home", () => {
 
   it("no muestra resultados antes de analizar", () => {
     render(<Home />);
-    expect(screen.queryByText("Clasificacion")).not.toBeInTheDocument();
+    expect(screen.queryByText("Clasificación")).not.toBeInTheDocument();
     expect(screen.queryByText("Costo Mensual Estimado")).not.toBeInTheDocument();
     expect(screen.queryByText("Recomendaciones")).not.toBeInTheDocument();
   });
@@ -56,7 +56,7 @@ describe("Home", () => {
     await user.type(screen.getByPlaceholderText("Ej: 8"), "6");
     await user.click(screen.getByRole("button", { name: /Analizar Consumo/i }));
 
-    expect(await screen.findByText("Clasificacion")).toBeInTheDocument();
+    expect(await screen.findByText("Clasificación")).toBeInTheDocument();
     expect(screen.getAllByText("Eficiente").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Costo Mensual Estimado")).toBeInTheDocument();
     expect(screen.getByText("Mantenga sus buenas practicas")).toBeInTheDocument();
@@ -116,7 +116,7 @@ describe("Home", () => {
 
   it("muestra boton nuevo analisis y historial vacio cuando no hay historial", () => {
     render(<Home />);
-    expect(screen.queryByText("Nuevo analisis")).not.toBeInTheDocument();
+    expect(screen.queryByText("Nuevo análisis")).not.toBeInTheDocument();
   });
 
   it("muestra nuevo analisis y historial despues de analizar", async () => {
@@ -136,7 +136,7 @@ describe("Home", () => {
     await user.type(screen.getByPlaceholderText("Ej: 8"), "6");
     await user.click(screen.getByRole("button", { name: /Analizar Consumo/i }));
 
-    expect(await screen.findByText("Nuevo analisis")).toBeInTheDocument();
-    expect(screen.getByText("Historial de analisis")).toBeInTheDocument();
+    expect(await screen.findByText("Nuevo análisis")).toBeInTheDocument();
+    expect(screen.getByText("Historial de análisis")).toBeInTheDocument();
   });
 });

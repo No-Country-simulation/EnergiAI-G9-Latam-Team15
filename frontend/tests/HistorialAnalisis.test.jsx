@@ -26,7 +26,7 @@ describe("HistorialAnalisis", () => {
 
   it("muestra el titulo y boton limpiar", () => {
     render(<HistorialAnalisis historial={mockHistorial} onLimpiar={vi.fn()} />);
-    expect(screen.getByText("Historial de analisis")).toBeInTheDocument();
+    expect(screen.getByText("Historial de análisis")).toBeInTheDocument();
     expect(screen.getByText("Limpiar")).toBeInTheDocument();
   });
 
@@ -45,5 +45,29 @@ describe("HistorialAnalisis", () => {
 
     await user.click(screen.getByText("Limpiar"));
     expect(onLimpiar).toHaveBeenCalledTimes(1);
+  });
+
+  it("llama a onEditar con la entrada al hacer click en editar", async () => {
+    const onEditar = vi.fn();
+    const user = userEvent.setup();
+    render(
+      <HistorialAnalisis historial={mockHistorial} onLimpiar={vi.fn()} onEditar={onEditar} />
+    );
+
+    await user.click(screen.getAllByLabelText("Editar análisis")[0]);
+    expect(onEditar).toHaveBeenCalledTimes(1);
+    expect(onEditar).toHaveBeenCalledWith(mockHistorial[0]);
+  });
+
+  it("llama a onEliminar con el id al hacer click en eliminar", async () => {
+    const onEliminar = vi.fn();
+    const user = userEvent.setup();
+    render(
+      <HistorialAnalisis historial={mockHistorial} onLimpiar={vi.fn()} onEliminar={onEliminar} />
+    );
+
+    await user.click(screen.getAllByLabelText("Eliminar análisis")[0]);
+    expect(onEliminar).toHaveBeenCalledTimes(1);
+    expect(onEliminar).toHaveBeenCalledWith(mockHistorial[0].id);
   });
 });

@@ -5,10 +5,10 @@ function generarRecomendaciones(consumo_kwh, uso_horario_pico, horas_alto_consum
 
   if (consumo_kwh > 300) {
     recomendaciones.push(
-      "Reduzca el consumo General: se recomienda revisar electrodomésticos de alto consumo como aires acondicionados y calentadores."
+      "Reduzca el consumo general: se recomienda revisar electrodomésticos de alto consumo como aires acondicionados y calentadores."
     );
     recomendaciones.push(
-      "Considere instalar paneles solares para compensar el alto consumo energetico."
+      "Considere instalar paneles solares para compensar el alto consumo energético."
     );
   }
 
@@ -29,17 +29,17 @@ function generarRecomendaciones(consumo_kwh, uso_horario_pico, horas_alto_consum
 
   if (horas_alto_consumo > 6) {
     recomendaciones.push(
-      "Reduce las horas de alto consumo: intente limitar el uso de equipos de alto consumo a menos de 4 horas diarias."
+      "Reduzca las horas de alto consumo: intente limitar el uso de equipos de alto consumo a menos de 4 horas diarias."
     );
   }
 
   recomendaciones.push(
-    "Mantenga los electrodomésticos con etiquetas de eficiencia energetica A o superior."
+    "Mantenga los electrodomésticos con etiquetas de eficiencia energética A o superior."
   );
 
   if (consumo_kwh < 150) {
     recomendaciones.push(
-      "Excelente nivel de consumo. Continúe con sus buenas prácticas de ahorro energetico."
+      "Excelente nivel de consumo. Continúe con sus buenas prácticas de ahorro energético."
     );
   }
 

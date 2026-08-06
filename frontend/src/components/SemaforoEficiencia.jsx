@@ -71,7 +71,7 @@ export default function SemaforoEficiencia({ categoria, probabilidad }) {
   return (
     <div className="bg-white rounded-2xl card-shadow p-6 md:p-8 flex flex-col items-center gap-5">
       <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em]">
-        Clasificacion
+        Clasificación
       </h3>
 
       <GaugeCircular porcentaje={porcentaje} stroke={config.stroke} />
@@ -94,7 +94,7 @@ export default function SemaforoEficiencia({ categoria, probabilidad }) {
       <div className="w-full space-y-2">
         <div className="flex justify-between text-xs text-gray-400 font-medium">
           <span>0%</span>
-          <span>Probabilidad de clasificacion</span>
+          <span>Probabilidad de clasificación</span>
           <span>100%</span>
         </div>
         <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">

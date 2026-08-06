@@ -15,6 +15,28 @@ export function formatearFechaCorta(isoString) {
   return d.toLocaleDateString("es-AR", { day: "2-digit", month: "short" });
 }
 
+export function formatearFechaHoraCorta(isoString) {
+  const d = new Date(isoString);
+  return d.toLocaleString("es-AR", {
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+export function formatearFechaHoraCompleta(isoString) {
+  const d = new Date(isoString);
+  return d.toLocaleString("es-AR", {
+    weekday: "short",
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export function formatearFechaCompleta(isoString) {
   const d = new Date(isoString);
   return d.toLocaleDateString("es-AR", {
