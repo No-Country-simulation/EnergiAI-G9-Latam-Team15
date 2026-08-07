@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 const TIPOS_INMUEBLE = [
   { value: "", label: "Seleccione tipo de inmueble" },
   { value: "Casa", label: "Casa" },
-  { value: "Departamento", label: "Departamento" },
-  { value: "Establecimiento", label: "Establecimiento" },
+  { value: "Pequeño establecimiento", label: "Pequeño establecimiento" },
 ];
 
 const TOOLTIPS = {

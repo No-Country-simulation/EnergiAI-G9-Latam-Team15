@@ -76,7 +76,7 @@ describe("Home", () => {
 
     await user.type(screen.getByPlaceholderText("Ej: 250"), "300");
     await user.type(screen.getByPlaceholderText("Ej: 12"), "10");
-    await user.selectOptions(screen.getByDisplayValue("Seleccione tipo de inmueble"), "Departamento");
+    await user.selectOptions(screen.getByDisplayValue("Seleccione tipo de inmueble"), "Pequeño establecimiento");
     await user.type(screen.getByPlaceholderText("Ej: 8"), "8");
     await user.click(screen.getByRole("button", { name: /Analizar Consumo/i }));
 
