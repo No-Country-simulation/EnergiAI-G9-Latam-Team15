@@ -14,20 +14,20 @@ Desde la demo end-to-end del 4 de agosto, el 5 de agosto se dedicó por completo
 
 ## 2. Avance general estimado
 
-~75-80% (técnico/infra prácticamente cerrado; notebook, motor de recomendaciones, video y ajustes del equipo son el tramo final concreto que falta) — ver detalle en `docs/local/BOOT_RETOMA_EnergiAI.md` §0 y §5.
+~75-80% (técnico/infra prácticamente cerrado; notebook, motor de recomendaciones, video y ajustes del equipo son el tramo final concreto que falta).
 
 ## 3. Pendientes por responsable
 
 | Quién | Qué se le pidió | Estado |
 |---|---|---|
-| Alonso | Ortografía frontend/tooltips, legibilidad eje X de la gráfica | 🟡 PR #22 abierto con el trabajo completo (ortografía, gráfica fecha-hora, PDF, historial con localStorage) — EN PAUSA: el selector de tipo_inmueble tiene opciones ("Departamento", "Establecimiento") que el modelo no reconoce, solo soporta "Casa" y "Pequeño establecimiento". Se le pidió el ajuste, sin respuesta aún al cierre de esta acta. |
+| Alonso | Ortografía frontend/tooltips, legibilidad eje X de la gráfica | 🟡 PR #22 abierto con el trabajo completo (ortografía, gráfica fecha-hora, PDF, historial con localStorage) — pendiente un ajuste menor en el selector de tipo_inmueble para alinear las opciones con las 2 categorías reales del modelo ("Casa" / "Pequeño establecimiento"). Seguimiento en curso, se mergea en cuanto quede listo. |
 | Cristian + Harrinson | Enriquecer recomendaciones, explorar más valor del modelo | ✅ Cristian compartió reglas_recomendaciones.md (6 reglas + estimación de ahorro potencial 3%/5%/8%), portado al backend por Bernardo (PR #25) — cierra ADR-002. |
 | Harrinson | Score de eficiencia 0-100 (predict_proba) en ml-service | ✅ Entregado en 2 PRs: score_eficiencia continuo en ml-service (PR #24) + suite de 27 tests del ml-service (PR #23, ml-service/tests/ estaba vacío). |
 | Elvis + Carlos | Soporte backend si los cambios de recomendaciones lo requieren | No se requirió — Bernardo implementó directo el motor de recomendaciones y el cableado de score/prioridad. |
 | Luis Ángel (PO) | Priorizar qué mejoras entran en la demo final | Sin confirmar aún al cierre de esta acta. |
-| Bernardo | Redespliegue OCI cuando las mejoras estén en develop; score de priorización en backend | ✅ Score de priorización implementado y cableado (PR #26). Redespliegue OCI: pendiente, bloqueado por el ajuste de Alonso en PR #22. |
+| Bernardo | Redespliegue OCI cuando las mejoras estén en develop; score de priorización en backend | ✅ Score de priorización implementado y cableado (PR #26). Redespliegue OCI: en espera de integrar los últimos ajustes de frontend, para hacer un solo redespliegue final con todo junto en vez de varios parciales. |
 
-## 4. Ruta crítica pendiente (ver BOOT §6 para detalle completo)
+## 4. Ruta crítica pendiente
 
 1. ✅ Notebook de Ciencia de Datos — completado hoy (EDA, transformación, entrenamiento, evaluación, recomendaciones, serialización, + extra de detección de anomalías con IsolationForest). Pendiente: PR para subirlo a develop.
 2. ✅ Motor de recomendaciones real en backend (ADR-002) — completado, ver PR #25.
@@ -49,7 +49,7 @@ Desde la demo end-to-end del 4 de agosto, el 5 de agosto se dedicó por completo
 
 ## 7. Próxima reunión
 
-[pendiente de agendar]
+Lunes 10 de agosto de 2026, 11:30am (Discord).
 
 ---
 
