@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TIPOS_INMUEBLE = [
   { value: "", label: "Seleccione tipo de inmueble" },
@@ -8,27 +8,34 @@ const TIPOS_INMUEBLE = [
 
 const TOOLTIPS = {
   consumo_kwh:
-    "Es la cantidad de energia electrica que consumio en el ultimo mes. Puede encontrarlo en su factura de luz, generalmente bajo el concepto 'Consumo Total'.",
+    "Cantidad de energía eléctrica que consumió en el último mes. Puede encontrarla en su factura de luz, generalmente bajo el concepto \"Consumo Total\".",
   cantidad_equipos:
-    "Cuantos electrodomesticos y dispositivos tiene conectados regularmente (heladera, aire acondicionado, lavarropas, TV, computadoras, etc.).",
+    "Cantidad de electrodomésticos y dispositivos que mantiene conectados con regularidad (heladera, aire acondicionado, lavarropas, TV, computadoras, etc.).",
   tipo_inmueble:
-    "El tipo de vivienda influye en el patron de consumo. Un establecimiento comercial consume de forma diferente a una casa.",
+    "El tipo de vivienda influye en el patrón de consumo. Un establecimiento comercial consume de forma diferente a una casa.",
   horas_alto_consumo:
-    "Horas al dia en que sus equipos funcionan a maxima capacidad. Ej: si el aire acondicionado funciona 8 horas seguidas, son 8 horas de alto consumo.",
+    "Horas al día en las que sus equipos funcionan a máxima capacidad. Por ejemplo, si el aire acondicionado funciona 8 horas seguidas, son 8 horas de alto consumo.",
   uso_horario_pico:
-    "El horario pico (18:00 a 22:00) es cuando la demanda electrica es mayor y el costo por kWh puede ser mas elevado. Use el interruptor si consume energia en ese horario.",
+    "El horario pico (18:00 a 22:00) es cuando la demanda eléctrica es mayor y el costo por kWh puede ser más elevado. Active el interruptor si consume energía en ese horario.",
 };
 
 function Tooltip({ text }) {
   return (
     <span className="tooltip-wrapper ml-1.5">
-      <span className="tooltip-trigger">?</span>
+      <span
+        className="tooltip-trigger"
+        role="button"
+        tabIndex="0"
+        aria-label="Más información"
+      >
+        ?
+      </span>
       <span className="tooltip-content">{text}</span>
     </span>
   );
 }
 
-export default function FormularioConsumo({ onAnalizar, cargando }) {
+export default function FormularioConsumo({ onAnalizar, cargando, datosIniciales }) {
   const [formulario, setFormulario] = useState({
     consumo_kwh: "",
     uso_horario_pico: false,
@@ -36,6 +43,17 @@ export default function FormularioConsumo({ onAnalizar, cargando }) {
     tipo_inmueble: "",
     horas_alto_consumo: "",
   });
+
+  useEffect(() => {
+    if (!datosIniciales) return;
+    setFormulario({
+      consumo_kwh: String(datosIniciales.consumo_kwh ?? ""),
+      uso_horario_pico: Boolean(datosIniciales.uso_horario_pico),
+      cantidad_equipos: String(datosIniciales.cantidad_equipos ?? ""),
+      tipo_inmueble: datosIniciales.tipo_inmueble ?? "",
+      horas_alto_consumo: String(datosIniciales.horas_alto_consumo ?? ""),
+    });
+  }, [datosIniciales]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -64,8 +82,13 @@ export default function FormularioConsumo({ onAnalizar, cargando }) {
       <div>
         <h2 className="text-lg font-bold text-gray-900">Datos de Consumo</h2>
         <p className="text-sm text-gray-400 mt-1">
-          Complete los campos para obtener su analisis energetico
+          Complete los campos para obtener su análisis energético
         </p>
+        {datosIniciales && (
+          <p className="text-xs text-brand-600 bg-brand-50 border border-brand-200 rounded-lg px-3 py-1.5 mt-2 inline-block">
+            Editando un análisis guardado: ajuste los datos y presione "Analizar Consumo".
+          </p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -126,7 +149,7 @@ export default function FormularioConsumo({ onAnalizar, cargando }) {
 
         <div className="space-y-1.5">
           <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            Horas de alto consumo al dia
+            Horas de alto consumo al día
             <Tooltip text={TOOLTIPS.horas_alto_consumo} />
           </label>
           <input

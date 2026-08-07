@@ -94,6 +94,81 @@ describe("useHistorial", () => {
     expect(localStorage.getItem("energiai_historial")).toBeNull();
   });
 
+  it("actualiza un analisis existente sin duplicar", () => {
+    const { result } = renderHook(() => useHistorial());
+
+    act(() => {
+      result.current.agregarAnalisis(mockDatos, mockResultado);
+    });
+    const id = result.current.historial[0].id;
+
+    act(() => {
+      result.current.actualizarAnalisis(
+        id,
+        { ...mockDatos, consumo_kwh: 250 },
+        { ...mockResultado, categoria: "Moderado" }
+      );
+    });
+
+    expect(result.current.historial.length).toBe(1);
+    expect(result.current.historial[0].datos.consumo_kwh).toBe(250);
+    expect(result.current.historial[0].resultado.categoria).toBe("Moderado");
+  });
+
+  it("mueve el analisis actualizado al tope del historial", () => {
+    const { result } = renderHook(() => useHistorial());
+
+    act(() => {
+      result.current.agregarAnalisis(mockDatos, mockResultado);
+    });
+    act(() => {
+      result.current.agregarAnalisis(mockDatos, { ...mockResultado, categoria: "Moderado" });
+    });
+    const id = result.current.historial[1].id;
+
+    act(() => {
+      result.current.actualizarAnalisis(id, mockDatos, mockResultado);
+    });
+
+    expect(result.current.historial.length).toBe(2);
+    expect(result.current.historial[0].id).toBe(id);
+  });
+
+  it("elimina un analisis puntual", () => {
+    const { result } = renderHook(() => useHistorial());
+
+    act(() => {
+      result.current.agregarAnalisis(mockDatos, mockResultado);
+    });
+    const id = result.current.historial[0].id;
+
+    act(() => {
+      result.current.eliminarAnalisis(id);
+    });
+    expect(result.current.historial.length).toBe(0);
+
+    const stored = JSON.parse(localStorage.getItem("energiai_historial"));
+    expect(stored.length).toBe(0);
+  });
+
+  it("elimina solo el analisis indicado", () => {
+    const { result } = renderHook(() => useHistorial());
+
+    act(() => {
+      result.current.agregarAnalisis(mockDatos, mockResultado);
+    });
+    act(() => {
+      result.current.agregarAnalisis(mockDatos, { ...mockResultado, categoria: "Moderado" });
+    });
+    const idEliminar = result.current.historial[1].id;
+
+    act(() => {
+      result.current.eliminarAnalisis(idEliminar);
+    });
+    expect(result.current.historial.length).toBe(1);
+    expect(result.current.historial[0].resultado.categoria).toBe("Moderado");
+  });
+
   it("limita a 20 entradas", () => {
     const { result } = renderHook(() => useHistorial());
 

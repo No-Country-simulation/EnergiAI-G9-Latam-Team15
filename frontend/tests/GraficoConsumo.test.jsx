@@ -23,7 +23,7 @@ describe("GraficoConsumo", () => {
 
   it("muestra el titulo y los graficos con 2 o mas analisis", () => {
     render(<GraficoConsumo historial={mockHistorialLargo} />);
-    expect(screen.getByText("Evolucion de tus analisis")).toBeInTheDocument();
+    expect(screen.getByText("Evolución de tus análisis")).toBeInTheDocument();
     expect(screen.getByText("Costo mensual estimado")).toBeInTheDocument();
     expect(screen.getByText("Clasificaciones obtenidas")).toBeInTheDocument();
   });

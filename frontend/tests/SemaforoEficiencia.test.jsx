@@ -5,7 +5,7 @@ import SemaforoEficiencia from "../src/components/SemaforoEficiencia";
 describe("SemaforoEficiencia", () => {
   it("muestra la categoria Ineficiente", () => {
     render(<SemaforoEficiencia categoria="Ineficiente" probabilidad={0.85} />);
-    expect(screen.getByText("Clasificacion")).toBeInTheDocument();
+    expect(screen.getByText("Clasificación")).toBeInTheDocument();
     expect(screen.getByText("Ineficiente")).toBeInTheDocument();
   });
 
@@ -48,6 +48,6 @@ describe("SemaforoEficiencia", () => {
 
   it("muestra el label de probabilidad", () => {
     render(<SemaforoEficiencia categoria="Moderado" probabilidad={0.5} />);
-    expect(screen.getByText("Probabilidad de clasificacion")).toBeInTheDocument();
+    expect(screen.getByText("Probabilidad de clasificación")).toBeInTheDocument();
   });
 });

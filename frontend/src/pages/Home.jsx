@@ -10,22 +10,52 @@ import HistorialAnalisis from "../components/HistorialAnalisis";
 import useHistorial from "../hooks/useHistorial";
 import { analizarConsumo } from "../services/apiService";
 
+const ULTIMO_RESULTADO_KEY = "energiai_ultimo_resultado";
+
+function cargarUltimoResultado() {
+  try {
+    const data = localStorage.getItem(ULTIMO_RESULTADO_KEY);
+    return data ? JSON.parse(data) : null;
+  } catch {
+    return null;
+  }
+}
+
+function guardarUltimoResultado(datos, resultado) {
+  try {
+    localStorage.setItem(
+      ULTIMO_RESULTADO_KEY,
+      JSON.stringify({ datos, resultado, guardadoEn: Date.now() })
+    );
+  } catch {
+    // localStorage lleno o no disponible
+  }
+}
+
 export default function Home() {
-  const [resultado, setResultado] = useState(null);
+  const [ultimoResultado] = useState(cargarUltimoResultado);
+  const [resultado, setResultado] = useState(ultimoResultado?.resultado ?? null);
   const [cargando, setCargando] = useState(false);
   const [descargando, setDescargando] = useState(false);
-  const [datosFormulario, setDatosFormulario] = useState(null);
   const resultadoRef = useRef(null);
   const pdfRef = useRef(null);
-  const { historial, agregarAnalisis, limpiarHistorial } = useHistorial();
+  const { historial, agregarAnalisis, actualizarAnalisis, limpiarHistorial, eliminarAnalisis } = useHistorial();
+  const [datosParaEditar, setDatosParaEditar] = useState(null);
+  const [idEnEdicion, setIdEnEdicion] = useState(null);
 
   const handleAnalizar = async (datos) => {
     setCargando(true);
     try {
       const respuesta = await analizarConsumo(datos);
       setResultado(respuesta);
-      setDatosFormulario(datos);
-      agregarAnalisis(datos, respuesta);
+      setDatosParaEditar(null);
+      if (idEnEdicion && historial.some((entrada) => entrada.id === idEnEdicion)) {
+        actualizarAnalisis(idEnEdicion, datos, respuesta);
+      } else {
+        agregarAnalisis(datos, respuesta);
+      }
+      setIdEnEdicion(null);
+      guardarUltimoResultado(datos, respuesta);
       setTimeout(() => {
         resultadoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
@@ -37,15 +67,41 @@ export default function Home() {
 
   const handleNuevoAnalisis = () => {
     setResultado(null);
-    setDatosFormulario(null);
+    setDatosParaEditar(null);
+    setIdEnEdicion(null);
+    localStorage.removeItem(ULTIMO_RESULTADO_KEY);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleLimpiarTodo = () => {
+    limpiarHistorial();
+    setResultado(null);
+    setDatosParaEditar(null);
+    setIdEnEdicion(null);
+    localStorage.removeItem(ULTIMO_RESULTADO_KEY);
+  };
+
+  const handleEditarAnalisis = (entrada) => {
+    setIdEnEdicion(entrada.id);
+    setDatosParaEditar(entrada.datos);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleEliminarAnalisis = (id) => {
+    eliminarAnalisis(id);
+    if (idEnEdicion === id) {
+      setIdEnEdicion(null);
+      setDatosParaEditar(null);
+    }
+  };
+
   const handleDescargarPDF = async () => {
-    if (!pdfRef.current || descargando) return;
+    const node = pdfRef.current;
+    if (!node || descargando) return;
     setDescargando(true);
     try {
-      const canvas = await html2canvas(pdfRef.current, {
+      node.classList.add("generando-pdf");
+      const canvas = await html2canvas(node, {
         scale: 2,
         backgroundColor: "#f4f6f8",
         useCORS: true,
@@ -88,6 +144,7 @@ export default function Home() {
       pdf.save("EnergiAI-Resultado.pdf");
     } catch {
     } finally {
+      node.classList.remove("generando-pdf");
       setDescargando(false);
     }
   };
@@ -114,18 +171,23 @@ export default function Home() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-10">
         <section className="text-center space-y-3 max-w-xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight leading-tight">
-            Analisis Energetico
+            Análisis Energético
             <span className="text-brand-600"> Inteligente</span>
           </h2>
           <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-            Ingrese los datos de su consumo y reciba una clasificacion de
-            eficiencia, el costo estimado y recomendaciones personalizadas.
+            Ingrese los datos de su consumo y reciba una clasificación de
+            eficiencia energética, el costo mensual estimado y recomendaciones
+            personalizadas para ahorrar energía.
           </p>
         </section>
 
-        <FormularioConsumo onAnalizar={handleAnalizar} cargando={cargando} />
+        <FormularioConsumo
+          onAnalizar={handleAnalizar}
+          cargando={cargando}
+          datosIniciales={datosParaEditar}
+        />
 
-        {resultado && (
+        {(resultado || historial.length > 0) && (
           <section ref={resultadoRef} className="space-y-6 animate-fadeIn scroll-mt-24">
             <div className="flex justify-end gap-3">
               <button
@@ -136,7 +198,7 @@ export default function Home() {
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                Nuevo analisis
+                Nuevo análisis
               </button>
               <button
                 onClick={handleDescargarPDF}
@@ -153,35 +215,41 @@ export default function Home() {
             </div>
 
             <div ref={pdfRef} className="space-y-6">
-              <div className="flex items-center gap-3 mb-2">
-                <img src="/logo_energiAI.png" alt="" className="w-8 h-8 rounded-lg object-contain" />
-                <div>
-                  <h3 className="text-base font-bold text-gray-900">EnergiAI &mdash; Resultado del Analisis</h3>
-                  <p className="text-xs text-gray-400">{new Date().toLocaleDateString("es-AR", { year: "numeric", month: "long", day: "numeric" })}</p>
-                </div>
-              </div>
+              {resultado && (
+                <>
+                  <div className="flex items-center gap-3 mb-2">
+                    <img src="/logo_energiAI.png" alt="" className="w-8 h-8 rounded-lg object-contain" />
+                    <div>
+                      <h3 className="text-base font-bold text-gray-900">EnergiAI &mdash; Resultado del Análisis</h3>
+                      <p className="text-xs text-gray-400">{new Date().toLocaleDateString("es-AR", { year: "numeric", month: "long", day: "numeric" })}</p>
+                    </div>
+                  </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <SemaforoEficiencia
-                  categoria={resultado.categoria}
-                  probabilidad={resultado.probabilidad}
-                />
-                <TarjetaCosto costo={resultado.costo_estimado_mensual} />
-              </div>
-              <ListaRecomendaciones
-                recomendaciones={resultado.recomendaciones}
-              />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <SemaforoEficiencia
+                      categoria={resultado.categoria}
+                      probabilidad={resultado.probabilidad}
+                    />
+                    <TarjetaCosto costo={resultado.costo_estimado_mensual} />
+                  </div>
+                  <ListaRecomendaciones
+                    recomendaciones={resultado.recomendaciones}
+                  />
+                </>
+              )}
+
+              {historial.length > 0 && (
+                <>
+                  <GraficoConsumo historial={historial} />
+                  <HistorialAnalisis
+                    historial={historial}
+                    onLimpiar={handleLimpiarTodo}
+                    onEditar={handleEditarAnalisis}
+                    onEliminar={handleEliminarAnalisis}
+                  />
+                </>
+              )}
             </div>
-          </section>
-        )}
-
-        {historial.length > 0 && (
-          <section className="space-y-6">
-            <GraficoConsumo historial={historial} />
-            <HistorialAnalisis
-              historial={historial}
-              onLimpiar={limpiarHistorial}
-            />
           </section>
         )}
       </main>

@@ -32,7 +32,7 @@ describe("apiService", () => {
     const result = await analizarConsumo(datosBase);
     expect(result).toEqual(mockResponse);
     expect(mockFetch).toHaveBeenCalledWith(
-      "http://localhost:8080/analisis-energetico",
+      "http://localhost:8080/api/v1/analisis-energetico",
       expect.objectContaining({ method: "POST" })
     );
   });

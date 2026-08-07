@@ -55,7 +55,7 @@ describe("FormularioConsumo", () => {
 
     await user.type(screen.getByPlaceholderText("Ej: 250"), "100");
     await user.type(screen.getByPlaceholderText("Ej: 12"), "5");
-    await user.selectOptions(screen.getByDisplayValue("Seleccione tipo de inmueble"), "Departamento");
+    await user.selectOptions(screen.getByDisplayValue("Seleccione tipo de inmueble"), "Pequeño establecimiento");
     await user.type(screen.getByPlaceholderText("Ej: 8"), "4");
     await user.click(screen.getByRole("button", { name: /Analizar Consumo/i }));
 

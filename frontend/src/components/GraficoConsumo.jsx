@@ -10,13 +10,20 @@ import {
   Bar,
   Cell,
 } from "recharts";
-import { COLORES_HEX, formatearFechaCorta } from "../utils/constants";
+import {
+  COLORES_HEX,
+  formatearFechaHoraCorta,
+  formatearFechaHoraCompleta,
+} from "../utils/constants";
 
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
+  const esFecha = !Number.isNaN(new Date(label).getTime());
   return (
     <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg">
-      <p className="font-semibold mb-1">{label}</p>
+      <p className="font-semibold mb-1">
+        {esFecha ? formatearFechaHoraCompleta(label) : label}
+      </p>
       {payload.map((entry, i) => (
         <p key={i} style={{ color: entry.color }}>
           {entry.name}: {entry.name === "Costo" ? `$${entry.value}` : entry.value}
@@ -30,9 +37,9 @@ export default function GraficoConsumo({ historial }) {
   if (!historial || historial.length < 2) return null;
 
   const datosLinea = [...historial]
-    .reverse()
+    .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
     .map((h) => ({
-      fecha: formatearFechaCorta(h.fecha),
+      fecha: h.fecha,
       Costo: parseFloat(h.resultado.costo_estimado_mensual),
       Confianza: Math.round(h.resultado.probabilidad * 100),
     }));
@@ -48,7 +55,7 @@ export default function GraficoConsumo({ historial }) {
   return (
     <div className="bg-white rounded-2xl card-shadow p-6 md:p-8 space-y-6">
       <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em]">
-        Evolucion de tus analisis
+        Evolución de tus análisis
       </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -63,6 +70,10 @@ export default function GraficoConsumo({ historial }) {
                   tick={{ fontSize: 10, fill: "#9ca3af" }}
                   tickLine={false}
                   axisLine={{ stroke: "#e5e7eb" }}
+                  interval="preserveStartEnd"
+                  minTickGap={16}
+                  tickMargin={8}
+                  tickFormatter={(value) => formatearFechaHoraCorta(value)}
                 />
                 <YAxis
                   tick={{ fontSize: 10, fill: "#9ca3af" }}
@@ -103,7 +114,7 @@ export default function GraficoConsumo({ historial }) {
                   axisLine={false}
                 />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="cantidad" name="Analisis" radius={[6, 6, 0, 0]}>
+                <Bar dataKey="cantidad" name="Análisis" radius={[6, 6, 0, 0]}>
                   {datosBarra.map((entry) => (
                     <Cell key={entry.nombre} fill={COLORES_HEX[entry.nombre]} />
                   ))}

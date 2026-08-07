@@ -1,19 +1,19 @@
 # Frontend
 
-Modulo de experiencia web de EnergiAI.
+Módulo de experiencia web de EnergiAI.
 
 ## Responsabilidad
 
 - captura de datos de consumo,
-- visualizacion de clasificacion,
-- presentacion de recomendaciones,
+- visualización de clasificación,
+- presentación de recomendaciones,
 - soporte a la demo final.
 
 ## Estructura esperada
 
-- `public/` recursos publicos
+- `public/` recursos públicos
 - `src/components/` componentes reutilizables
 - `src/pages/` vistas principales
 - `src/services/` clientes HTTP y acceso a API
-- `src/styles/` estilos globales y tematicos
+- `src/styles/` estilos globales y temáticos
 - `tests/` pruebas de frontend
