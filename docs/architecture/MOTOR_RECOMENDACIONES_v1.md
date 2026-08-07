@@ -15,6 +15,16 @@ El resto de este documento se conserva sin modificar como registro histórico de
 
 ---
 
+## ADENDA — 2026-08-06: Implementación cerrada
+
+Portado a `AnalisisEnergeticoService.java` (PR #25, mergeado a `develop`). El hallazgo central de esta auditoría ya no aplica: el backend es ahora la fuente de verdad de `recomendaciones`.
+
+**El motor implementado no es el de la §2 de este documento.** Cristian Coronel entregó un set de reglas actualizado (6 reglas, condicionadas a `categoria` del modelo + `uso_horario_pico`/`horas_alto_consumo`/`consumo_kwh`/`tipo_inmueble`), distinto de las 8 reglas basadas solo en umbrales crudos descritas abajo. Ver `architecture/decisions/ADR-002-motor-recomendaciones-backend.md` (adenda 2026-08-06) para el detalle y un ajuste de escala pendiente de confirmar con Cristian/Harrinson (no bloqueante).
+
+Sigue pendiente la Acción #3 de §5: alinear el texto de ejemplo de `API_CONTRACT_V1.md` con el texto real que produce el backend — el ejemplo del contrato todavía no coincide con ninguna de las 6 frases reales.
+
+---
+
 ## 1. Hallazgo principal
 
 El "motor de recomendaciones" de EnergiAI **existe hoy y es funcional**, pero vive enteramente dentro del mock de fallback del frontend, no en el backend ni en el servicio ML como indica el flujo documentado en `API_CONTRACT_V1.md` (`Frontend → Backend → ML Service → Modelo IA`, con `recomendaciones` como parte de la respuesta del backend). Es decir: **la única lógica de negocio de recomendaciones que existe en todo el repositorio está en una capa que la arquitectura designa como temporal (mock de contingencia ante fallo de red).**

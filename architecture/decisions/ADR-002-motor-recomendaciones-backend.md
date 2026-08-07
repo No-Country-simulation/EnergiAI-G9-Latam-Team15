@@ -24,6 +24,14 @@ El mock de `apiService.js` en el frontend **se mantiene**, pero exclusivamente c
 
 **No implementado.** `AnalisisEnergeticoService.java` hoy retorna 3 recomendaciones fijas hardcodeadas, no las 8 reglas condicionadas a la entrada. Esta ADR registra la decisión arquitectónica; la implementación queda como tarea pendiente, relacionada con el trabajo ya asignado a Cristian Coronel y Harrinson Villabona en `meetings/ActaReunion-008-ENERGIAI.md` §6 ("enriquecer recomendaciones con la data disponible") — portar las 8 reglas es el paso previo mínimo antes de enriquecerlas.
 
+### ADENDA — 2026-08-06: Implementado
+
+`generarRecomendaciones()` está portado en `AnalisisEnergeticoService.java` (PR #25, `feature/motor-recomendaciones`, mergeado a `develop`). **Nota:** son **6 reglas**, no las 8 originales de `docs/architecture/MOTOR_RECOMENDACIONES_v1.md` §2 — Cristian Coronel entregó un documento de reglas actualizado (condicionadas a `categoria` + `uso_horario_pico`/`horas_alto_consumo`/`consumo_kwh`/`tipo_inmueble`, no solo a umbrales crudos). Ver §2 más abajo para el detalle de la desviación de escala que se ajustó durante la implementación.
+
+En el mismo arco de trabajo (PR #26, `feature/score-y-prioridad-backend`, también mergeado): `MlClient` ya no descarta `score_eficiencia` del ml-service, y se agregó `prioridad` (`consumo_kwh × peso_categoria`, útil para priorización B2B) como campo aditivo nuevo en `AnalisisResponseDTO`. Ninguno de los dos PRs tocó el contrato existente (`categoria`, `probabilidad`, `recomendaciones`, `costo_estimado_mensual`).
+
+**Ajuste de escala no bloqueante, pendiente de confirmar con Cristian/Harrinson:** el umbral de `horas_alto_consumo` en la regla 2 se fijó en 6 horas/día (no el percentil 75 del dataset = 228, que está en otra escala — el campo del formulario pide horas *al día*, 0-24, no la métrica del dataset). Documentado como comentario en el código.
+
 ## Consecuencias
 
 - Positivo: una sola fuente de verdad para las recomendaciones reales (backend), con el frontend limitado a fallback declarado.
