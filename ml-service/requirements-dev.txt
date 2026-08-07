@@ -1,0 +1,11 @@
+# EnergiAI — ml-service | dependencias SOLO de desarrollo y pruebas
+# Se mantienen aparte de requirements.txt para no engordar la imagen Docker
+# de producción con librerías que el servicio no necesita en runtime.
+#
+# Instalar:  pip install -r requirements-dev.txt
+# Ejecutar:  cd ml-service && pytest tests/ -v
+
+-r requirements.txt
+
+pytest==8.3.4
+httpx==0.28.1   # requerido por fastapi.testclient.TestClient

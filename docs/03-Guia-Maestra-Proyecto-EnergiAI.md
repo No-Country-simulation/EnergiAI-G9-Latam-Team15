@@ -175,7 +175,7 @@ El MVP oficial del proyecto incluye:
 
 ### 7.1 Dominio recomendado para el MVP
 
-Para reducir complejidad, el MVP se enfocara inicialmente en **usuario residencial**.
+Para reducir complejidad y mantener una unica definicion de alcance, el MVP oficial se enfoca en **usuario residencial**.
 
 ---
 

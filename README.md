@@ -1,238 +1,133 @@
-# EnergiAI-G9-Latam-Team15
+![EnergiAI](assets/branding/banner.svg)
 
-Repositorio oficial del proyecto **EnergiAI** para el Hackathon Oracle + Alura + NoCountry.
+[![Licencia: MIT](https://img.shields.io/badge/Licencia-MIT-yellow.svg)](LICENSE)
+![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.3-6DB33F?logo=springboot&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)
+![Estado](https://img.shields.io/badge/Estado-Desplegado%20en%20OCI-success)
 
-EnergiAI es una solucion orientada al analisis de patrones de consumo energetico para clasificar usuarios en:
+# EnergiAI
 
-- `Eficiente`
-- `Moderado`
-- `Ineficiente`
+EnergiAI clasifica el consumo eléctrico residencial en **Eficiente**, **Moderado** o **Ineficiente**, estima el costo mensual y genera recomendaciones de ahorro a partir de un modelo de Machine Learning. Proyecto construido para el **Hackathon ONE G9-LATAM** (Alura + Oracle + NoCountry).
 
-La plataforma combina:
+---
 
-- **React** para la experiencia web
-- **Spring Boot** para la API y la orquestacion del negocio
-- **Python Scikit-Learn** para inferencia de modelos
-- **Oracle Cloud Infrastructure (OCI)** para despliegue, almacenamiento y soporte operativo
+## Demo en vivo
 
-## Tabla de Contenidos
+**[http://149.130.187.192](http://149.130.187.192)**
 
-- [Vision General](#vision-general)
-- [Objetivo del Hackathon](#objetivo-del-hackathon)
-- [Arquitectura](#arquitectura)
-- [Estructura del Repositorio](#estructura-del-repositorio)
-- [Roadmap](#roadmap)
-- [Git Flow](#git-flow)
-- [OCI](#oci)
-- [Documentacion](#documentacion)
-- [Equipo](#equipo)
-- [Como Contribuir](#como-contribuir)
-- [Licencia](#licencia)
+> ⚠️ No es infraestructura de producción 24/7 — es la Container Instance del hackathon en OCI, puede no estar siempre activa.
 
-## Vision General
-
-EnergiAI transforma datos de consumo electrico en informacion accionable para apoyar decisiones de ahorro y sostenibilidad.
-
-### Propuesta de valor
-
-- clasificacion automatica del perfil energetico,
-- recomendaciones claras y accionables,
-- visualizacion simple para demo y adopcion,
-- arquitectura desacoplada y evolutiva,
-- integracion cloud pragmatica sobre OCI.
-
-## Objetivo del Hackathon
-
-Construir un MVP demostrable, estable y defendible que entregue el flujo:
-
-`dato de consumo -> clasificacion -> recomendacion -> visualizacion -> evidencia OCI`
-
-El foco del MVP se encuentra en **usuario residencial**, priorizando claridad funcional y bajo riesgo de integracion.
+---
 
 ## Arquitectura
 
-La arquitectura del proyecto esta documentada en detalle en los siguientes artefactos:
-
-- [Vision General](architecture/01-Vision-General.md)
-- [Arquitectura Inicial](architecture/02-Arquitectura-Propuesta.md)
-- [Arquitectura Empresarial y MVP](architecture/03-Arquitectura-Empresarial-EnergiAI.md)
-- [C4 Nivel 1 - Contexto](diagrams/01-C4-Nivel-1-Contexto.md)
-- [C4 Nivel 2 - Contenedores](diagrams/02-C4-Nivel-2-Contenedores.md)
-- [Revision Arquitectonica y Version Optimizada](docs/02-Revision-Arquitectonica-y-Version-Optimizada.md)
-- [Guia Maestra del Proyecto](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
-
-### Stack principal
-
-| Capa | Tecnologia | Responsabilidad |
-|---|---|---|
-| Frontend | React | experiencia web y visualizacion |
-| Backend | Spring Boot | API, reglas de negocio e integracion |
-| ML | Python + Scikit-Learn | inferencia de clasificacion |
-| Datos | Base relacional + Object Storage | persistencia y artefactos |
-| Cloud | OCI | despliegue, almacenamiento, observabilidad |
-
-## Estructura del Repositorio
-
-```text
-EnergiAI-G9-Latam-Team15/
-|-- .github/
-|-- assets/
-|   |-- branding/
-|   |-- diagrams/
-|   |-- presentations/
-|   `-- screenshots/
-|-- architecture/
-|-- backend/
-|   `-- src/
-|       |-- main/
-|       |   |-- java/
-|       |   `-- resources/
-|       `-- test/
-|           `-- java/
-|-- data/
-|   |-- processed/
-|   |-- raw/
-|   `-- samples/
-|-- diagrams/
-|-- docs/
-|-- frontend/
-|   |-- public/
-|   |-- src/
-|   |   |-- components/
-|   |   |-- pages/
-|   |   |-- services/
-|   |   `-- styles/
-|   `-- tests/
-|-- infra/
-|   |-- docker/
-|   |-- oci/
-|   `-- scripts/
-|-- meetings/
-|   `-- ActaReunion-001-ENERGIAI.md
-|-- ml-service/
-|   |-- app/
-|   |-- models/
-|   |-- notebooks/
-|   `-- tests/
-|-- planning/
-|-- .gitignore
-|-- CODE_OF_CONDUCT.md
-|-- CONTRIBUTING.md
-|-- LICENSE
-`-- README.md
+```mermaid
+flowchart LR
+    U[Usuario] --> FE[React]
+    FE --> BE[Spring Boot]
+    BE --> ML[FastAPI]
+    ML --> M[Modelo ML]
+    BE -.desplegado en.-> OCI[(OCI)]
+    ML -.desplegado en.-> OCI
+    FE -.desplegado en.-> OCI
 ```
 
-### Organizacion de assets
+Diagrama completo de contenedores: [`diagrams/02-C4-Nivel-2-Contenedores.md`](diagrams/02-C4-Nivel-2-Contenedores.md)
 
-| Carpeta | Uso |
+---
+
+## Stack tecnológico
+
+| Capa | Tecnología |
 |---|---|
-| `assets/branding/` | logos, identidad visual, piezas de marca |
-| `assets/diagrams/` | exportaciones visuales de arquitectura y flujos |
-| `assets/screenshots/` | capturas para README, demo y evidencias |
-| `assets/presentations/` | materiales de pitch, presentaciones y anexos |
+| **Frontend** | React 18 + Vite + Tailwind CSS, servido por Nginx |
+| **Backend** | Java 21 + Spring Boot 3.2.3 (Web, Validation, Actuator) |
+| **ML** | Python 3.12 + FastAPI + Scikit-Learn (RandomForest) |
+| **Infra** | Docker + Docker Compose (local) — OCI Container Instance + OCIR (nube) |
 
-## Roadmap
+---
 
-| Semana | Objetivo principal | Resultado esperado |
-|---|---|---|
-| Sprint 0 | alineacion y setup | alcance, roles, dataset preliminar, estructura |
-| Sprint 1 | contratos y skeletons | frontend, backend y ML base |
-| Sprint 2 | vertical slice | flujo end-to-end operativo |
-| Sprint 3 | consolidacion | baseline ML, persistencia y recomendaciones |
-| Sprint 4 | calidad y diferenciacion | UX, smoke tests, funcionalidad diferencial |
-| Sprint 5 | estabilizacion | demo final, evidencias, cierre documental |
+## Documentación
 
-Documentos relacionados:
-
-- [Roadmap Tecnico de 5 Semanas](planning/03-Roadmap-Tecnico-5-Semanas.md)
-- [Guia Maestra del Proyecto](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
-
-## Git Flow
-
-Estrategia de ramas adoptada:
-
-- `main`: estado estable y demostrable
-- `develop`: integracion continua del trabajo del equipo
-- `feature/<dominio>-<nombre>`: nuevas capacidades
-- `release/<version>`: estabilizacion de entrega
-- `hotfix/<nombre>`: correcciones urgentes
-
-Convencion de commits:
-
-```text
-feat(frontend): agrega formulario de clasificacion
-feat(backend): implementa endpoint /classifications
-feat(ml): publica baseline random forest
-docs(pmo): actualiza guia maestra
-fix(infra): corrige variables OCI
-```
-
-Referencia:
-
-- [Estructura de Repositorio y Git Flow](docs/01-Estructura-Repositorio-y-GitFlow.md)
-
-## OCI
-
-OCI se utiliza como habilitador pragmatica del MVP, priorizando:
-
-- despliegue temprano,
-- almacenamiento de datasets y modelos,
-- evidencia real de integracion cloud,
-- soporte a la demo final.
-
-Servicios OCI recomendados:
-
-- **OCI Compute** o **Container Instances**
-- **OCI Object Storage**
-- **OCI Logging**
-- **OCI Monitoring**
-- **OCI Vault** si el tiempo del hackathon lo permite
-
-Referencia:
-
+**Arquitectura y contratos**
 - [Arquitectura Empresarial y MVP](architecture/03-Arquitectura-Empresarial-EnergiAI.md)
-- [Guia Maestra del Proyecto](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
+- [Contrato de Integración v1 (Frontend↔Backend)](architecture/contracts/API_CONTRACT_V1.md)
+- [Contrato Interno (Backend↔ML Service)](architecture/contracts/CONTRATO_INTERNO_BACKEND_ML.md)
+- [ADR-001 — Contrato de Integración](architecture/decisions/ADR-001-contrato-integracion-v1.md)
+- [ADR-002 — Motor de Recomendaciones en Backend](architecture/decisions/ADR-002-motor-recomendaciones-backend.md)
 
-## Documentacion
+**Diagramas**
+- [C4 Nivel 2 — Contenedores](diagrams/02-C4-Nivel-2-Contenedores.md)
+- [C4 Nivel 3 — Componentes del Backend](diagrams/03-C4-Nivel-3-Componentes.md)
+- [Diagrama de Secuencia — Análisis Energético](diagrams/04-Diagrama-Secuencia-Analisis-Energetico.md)
 
-La documentacion principal del proyecto se encuentra organizada en:
+**Despliegue**
+- [Despliegue OCI](infra/oci/README.md)
 
-- `architecture/` para arquitectura objetivo y MVP
-- `diagrams/` para diagramas C4 y representacion visual
-- `docs/` para documentacion ejecutiva, PMO y gobierno
-- `planning/` para roles, riesgos y roadmap
+**Índice completo**
+- [Índice Maestro de Documentación](docs/00-Indice-Arquitectura.md)
 
-Indice recomendado:
+**Ciencia de datos**
+- 📊 Notebook de Ciencia de Datos — 🟡 En construcción, publicación esperada esta semana
 
-- [Indice Maestro de Documentacion](docs/00-Indice-Arquitectura.md)
-- [Guia Maestra del Proyecto EnergiAI](docs/03-Guia-Maestra-Proyecto-EnergiAI.md)
-- [Gestion de Riesgos Arquitectonicos](planning/04-Gestion-de-Riesgos-Arquitectonicos.md)
+**Motor de recomendaciones**
+- [Auditoría del Motor de Recomendaciones](docs/architecture/MOTOR_RECOMENDACIONES_v1.md)
+
+---
 
 ## Equipo
 
-| Integrante | Rol oficial inicial |
+Equipo activo con 7 integrantes.
+
+| Integrante | Rol |
 |---|---|
 | Luis Angel Chavez Mejia | Product Owner |
-| Bernardo Gomez | Software Architect |
+| Bernardo Adolfo Gómez Montoya| Software Architect |
 | Harrinson Villabona | Data Scientist |
-| Anayely Reyes | Data Engineer |
 | Carlos Fabian Mesa | Backend Developer |
 | Elvis Trinidad | Backend Developer |
-| Magno Cristian | Data Analyst |
+| Magno Cristian Coronel | Data Analyst |
 | Alonso Carbajal | Full Stack Developer |
 
-Referencia:
+> **Nota:** Anayely Reyes (Data Engineer) no continuó en la simulación ([Acta 007](meetings/ActaReunion-007-ENERGIAI.md) §1). La redistribución formal de su rol sigue pendiente — ver [`planning/05-Backlog-Sprint2-ENERGIAI.md`](planning/05-Backlog-Sprint2-ENERGIAI.md), Tarea #16.
 
-- [Roles del Equipo](planning/01-Roles.md)
+Referencia completa: [`planning/01-Roles.md`](planning/01-Roles.md)
 
-## Como Contribuir
+---
 
-Antes de abrir cambios:
+## Cómo correr el proyecto localmente
 
-1. Lee [CONTRIBUTING.md](CONTRIBUTING.md).
-2. Revisa el [Codigo de Conducta](CODE_OF_CONDUCT.md).
-3. Verifica si el cambio impacta arquitectura, backlog o documentacion.
-4. Mantiene los cambios pequenos, trazables y revisables.
+Requiere Docker y Docker Compose.
+
+```bash
+git clone https://github.com/No-Country-simulation/EnergiAI-G9-Latam-Team15.git
+cd EnergiAI-G9-Latam-Team15
+docker-compose up --build
+```
+
+Por defecto:
+
+| Servicio | URL local |
+|---|---|
+| Frontend | http://localhost:5180 |
+| Backend | http://localhost:8080 |
+| ML Service | http://localhost:8000 |
+
+---
+
+## 📚 Documentación adicional
+
+- **Visión General:** [architecture/01-Vision-General.md](architecture/01-Vision-General.md)
+- **Objetivo del Hackathon:** MVP demostrable que entregue el flujo *dato de consumo → clasificación → recomendación → visualización → evidencia OCI*, con foco en usuario residencial.
+- **Roadmap Técnico:** [planning/03-Roadmap-Tecnico-5-Semanas.md](planning/03-Roadmap-Tecnico-5-Semanas.md)
+- **Estrategia GitFlow:** [docs/01-Estructura-Repositorio-y-GitFlow.md](docs/01-Estructura-Repositorio-y-GitFlow.md)
+- **Dataset — investigación y estrategia:** [docs/data-engineering/](docs/data-engineering/)
+
+---
 
 ## Licencia
 

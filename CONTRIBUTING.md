@@ -25,11 +25,12 @@ Este repositorio sigue una disciplina de contribucion orientada a hackathon, per
 ## Flujo de trabajo
 
 1. Revisa el backlog y valida que el trabajo tenga owner.
-2. Crea una rama desde `develop`.
+2. Crea una rama `feature/<dominio>-<nombre>` desde `develop`.
 3. Implementa el cambio en un alcance pequeno.
 4. Actualiza documentacion si el cambio modifica arquitectura, roadmap, riesgos o contratos.
 5. Ejecuta validaciones minimas del modulo afectado.
-6. Abre un Pull Request con evidencia suficiente.
+6. Abre un Pull Request hacia `develop` con evidencia suficiente.
+7. Promueve cambios desde `develop` hacia `main` solo cuando correspondan a una linea base estable.
 
 ## Estrategia de ramas
 
@@ -38,8 +39,6 @@ Ramas admitidas:
 - `main`
 - `develop`
 - `feature/<dominio>-<nombre>`
-- `release/<version>`
-- `hotfix/<nombre>`
 
 Ejemplos:
 
@@ -47,7 +46,16 @@ Ejemplos:
 feature/frontend-dashboard-clasificacion
 feature/backend-endpoint-classifications
 feature/ml-baseline-random-forest
-hotfix/timeout-ml-service
+```
+
+Flujo oficial:
+
+```text
+main
+  ↑
+develop
+  ↑
+feature/*
 ```
 
 ## Convencion de commits

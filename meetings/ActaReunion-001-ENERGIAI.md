@@ -1,4 +1,4 @@
-# ACTA DE REUNIÓN 001 – EnergyAI
+# ACTA DE REUNIÓN 001 – EnergiAI
 
 ## Fecha
 14 de julio de 2026
