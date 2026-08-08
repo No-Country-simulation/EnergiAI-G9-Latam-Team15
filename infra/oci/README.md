@@ -92,18 +92,22 @@ Basado en `docker-compose.yml` (equivalentes deben configurarse en el entorno OC
 
 ## 6. Reproducir el build y push localmente
 
+> **Nota (2026-08-08):** estos comandos generan la **versión candidata** (`:v2`/`:v2`/`:v3`,
+> ver §1 y §4), no la oficial en curso (`:v1`/`:v1`/`:v2`, todavía sirviendo
+> `149.130.187.192`).
+
 ```bash
 # Desde la raíz del repo
-docker build -f ml-service/Dockerfile -t bog.ocir.io/axvu1ir8dwvf/energiai-ml:v1 .
-docker build -f backend/Dockerfile -t bog.ocir.io/axvu1ir8dwvf/energiai-backend:v1 ./backend
-docker build -f frontend/Dockerfile -t bog.ocir.io/axvu1ir8dwvf/energiai-frontend:v2 ./frontend
+docker build -f ml-service/Dockerfile -t bog.ocir.io/axvu1ir8dwvf/energiai-ml:v2 .
+docker build -f backend/Dockerfile -t bog.ocir.io/axvu1ir8dwvf/energiai-backend:v2 ./backend
+docker build -f frontend/Dockerfile -t bog.ocir.io/axvu1ir8dwvf/energiai-frontend:v3 ./frontend
 
 # Login (usar auth token OCI, no la contraseña de la consola)
 docker login bog.ocir.io -u '<tenancy-namespace>/<usuario>'
 
-docker push bog.ocir.io/axvu1ir8dwvf/energiai-ml:v1
-docker push bog.ocir.io/axvu1ir8dwvf/energiai-backend:v1
-docker push bog.ocir.io/axvu1ir8dwvf/energiai-frontend:v2
+docker push bog.ocir.io/axvu1ir8dwvf/energiai-ml:v2
+docker push bog.ocir.io/axvu1ir8dwvf/energiai-backend:v2
+docker push bog.ocir.io/axvu1ir8dwvf/energiai-frontend:v3
 ```
 
 ## 7. Evidencia pendiente
