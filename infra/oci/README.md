@@ -1,8 +1,8 @@
 # Despliegue OCI — EnergiAI
 
-**Estado:** Desplegado (confirmado en `meetings/ActaReunion-008-ENERGIAI.md`, demo 2026-08-04).
+**Estado:** Desplegado (confirmado en `meetings/ActaReunion-008-ENERGIAI.md`, demo 2026-08-04). Redesplegado con nuevas imágenes el 2026-08-08 (ver §1 y §2).
 **Responsable:** Bernardo Adolfo Gómez Montoya — Software / Solution Architect.
-**Última actualización:** 2026-08-05.
+**Última actualización:** 2026-08-08.
 
 > Este documento reemplaza el vacío señalado en `docs/deployment/CHECKLIST_OCI.md` (Fase 4: *"`infra/oci/README.md` (hoy inexistente)"*). Contiene lo verificable desde el repositorio; los campos marcados `[COMPLETAR]` requieren que Bernardo los rellene con los valores exactos de la consola OCI — no se inventaron para no dejar documentación incorrecta.
 
@@ -10,7 +10,7 @@
 
 ## 1. Registro de imágenes (OCI Container Registry — OCIR)
 
-Confirmado — las 3 imágenes del stack están publicadas:
+**Imágenes vigentes en la instancia oficial (`149.130.187.192`, sin cambios):**
 
 | Servicio | Imagen |
 |---|---|
@@ -18,9 +18,19 @@ Confirmado — las 3 imágenes del stack están publicadas:
 | Backend | `bog.ocir.io/axvu1ir8dwvf/energiai-backend:v1` |
 | ML Service | `bog.ocir.io/axvu1ir8dwvf/energiai-ml:v1` |
 
+**Imágenes nuevas, publicadas en OCIR y en uso en la instancia candidata (ver §2 y §4) — 2026-08-08:**
+
+| Servicio | Imagen |
+|---|---|
+| Frontend | `bog.ocir.io/axvu1ir8dwvf/energiai-frontend:v3` |
+| Backend | `bog.ocir.io/axvu1ir8dwvf/energiai-backend:v2` |
+| ML Service | `bog.ocir.io/axvu1ir8dwvf/energiai-ml:v2` |
+
 Región: Bogotá (`bog` en el hostname de OCIR).
 
 > **Nota (2026-08-05):** el frontend quedó en `:v2` porque se reconstruyó después del fix de proxy Nginx / `VITE_API_URL` (commit `556f9ce`) — la `:v1` original no tenía esa corrección. Backend y ML Service no necesitaron rebuild y siguen en `:v1`.
+>
+> **Nota (2026-08-08):** redespliegue con las 3 imágenes en `:v2`/`:v2`/`:v3`. Verificado end-to-end contra la instancia candidata (§2): `/api/v1/health` → 200, y `POST /api/v1/analisis-energetico` devolviendo `score_eficiencia`, `prioridad` y recomendaciones variables reales (no mock) para perfiles Ineficiente y Eficiente. La instancia oficial (`149.130.187.192`, imágenes viejas) no fue tocada — sigue siendo la que recibe tráfico de producción hasta que se confirme el corte.
 
 ## 2. Cómputo usado para el despliegue
 
@@ -28,12 +38,21 @@ Región: Bogotá (`bog` en el hostname de OCIR).
 `VM.Standard.A1.Flex` fueron un camino explorado en paralelo, pero el despliegue que
 quedó funcionando es sobre Container Instance).
 
-- Container Instance: estado `ACTIVE`, alojando los 3 contenedores del stack
-  (`ml-service:v1`, `backend:v1`, `frontend:v2`) como grupo.
-- Memoria: **8GB** — el intento inicial con 2GB fallaba por memoria insuficiente; se
-  subió a 8GB y ahí quedó estable.
-- `[COMPLETAR: Bernardo]` — OCID de la instancia, Availability Domain exacto y
-  cantidad de OCPUs asignadas (no quedaron registrados en las notas de seguimiento).
+- Availability Domain: `oFTz:SA-BOGOTA-1-AD-1`
+- Shape: `CI.Standard.E4.Flex`, 1 OCPU, 8GB RAM — el intento inicial con 2GB fallaba por
+  memoria insuficiente; se subió a 8GB y ahí quedó estable.
+
+**Instancia oficial (producción, sin cambios):**
+- Estado `ACTIVE`, alojando `ml-service:v1`, `backend:v1`, `frontend:v2`.
+- OCID: `ocid1.computecontainerinstance.oc1.sa-bogota-1.anrgcljrhi7cjgqa6esso4xgjz5ovp2mr35gw5pdgy3g4tddzruypqcdqfcq`
+
+**Instancia candidata (redesplegada 2026-08-08, ver §4 — aún NO es la oficial):**
+- Estado `ACTIVE`, alojando `ml-service:v2`, `backend:v2`, `frontend:v3`.
+- OCID: `ocid1.computecontainerinstance.oc1.sa-bogota-1.anrgcljrhi7cjgqafrhuvddtrhe7dt52glqgmhqgp3kyhw6q7uxih77xg4aa`
+
+> Nota: existe además una tercera Container Instance en estado `FAILED` (residuo de un
+> intento anterior, no sirve tráfico) — pendiente de limpieza, no documentada aquí en
+> detalle porque no es operativa.
 
 ## 3. Red
 
@@ -45,10 +64,20 @@ quedó funcionando es sobre Container Instance).
 
 ## 4. Acceso público
 
-**URL:** `http://149.130.187.192`
+**URL oficial (producción):** `http://149.130.187.192`
 
 Verificado funcionando: formulario cargando, análisis respondiendo, historial
 mostrando resultados reales (captura del 5-ago-2026, ~8:37am).
+
+**URL candidata a IP pública final (2026-08-08):** `http://157.137.235.227`
+
+IP pública **reservada** (permanente, no efímera) de la instancia candidata descrita en
+§2, apuntando a las imágenes `:v2`/`:v2`/`:v3`. Verificada end-to-end el 2026-08-08
+(`/api/v1/health` → 200; análisis real con perfiles Ineficiente y Eficiente devolviendo
+`score_eficiencia`, `prioridad` y recomendaciones variables). **No reemplaza todavía a
+la URL oficial** — el corte de tráfico (DNS/decomiso de la instancia vieja) queda
+pendiente de una decisión aparte, una vez haya más confianza acumulada sobre la
+instancia candidata.
 
 ## 5. Variables de entorno usadas en el despliegue
 
